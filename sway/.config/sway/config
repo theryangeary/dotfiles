@@ -261,9 +261,8 @@ bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
 
 # Float windows
-#for_window [title="[Gg]uake!?"] floating enable
-for_window [title="Slack"] floating enable
-#for_window [title="^."] border pixel 10 #pixel 10
+for_window [title="Calculator"] floating enable
+for_window [class="Slack.*"] floating enable
 
 default_border none
 
