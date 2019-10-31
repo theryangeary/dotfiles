@@ -50,6 +50,7 @@ alias vimrc="$EDITOR ~/.vimrc"
 alias zshrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 alias tmuxrc="$EDITOR ~/.tmux.conf && tmux source-file ~/.tmux.conf"
 alias swayrc="$EDITOR ~/.config/sway/config"
+alias i3statusrc="$EDITOR ~/.config/i3status/config"
 
 function lsA() {
   if [ $PWD = $HOME ];
