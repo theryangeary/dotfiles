@@ -36,6 +36,7 @@ alias list_installed="comm -23 <(pacman -Qqett | sort) <(pacman -Qqg base -g bas
 alias r="sudo pacman -Rs"
 alias u="sudo yay -Syu"
 
+alias bc="bc -lq"
 alias cat=bat
 alias docker="sudo docker"
 alias gp!="$(gp |& grep git)"
