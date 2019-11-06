@@ -21,6 +21,7 @@ source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
 
 bindkey \^U backward-kill-line
+bindkey -s \^L 'clear && clear\n'
 
 export SAVEHIST=500000
 export EDITOR="nvim"
