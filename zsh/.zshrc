@@ -35,7 +35,7 @@ alias i="sudo pacman -S"
 alias s="pacman -Slq | fzf -m --preview 'pacman -Si {1}' | xargs -r sudo pacman -S --noconfirm"
 alias list_installed="comm -23 <(pacman -Qqett | sort) <(pacman -Qqg base -g base-devel | sort | uniq)"
 alias r="sudo pacman -Rs"
-alias u="sudo yay -Syu"
+alias u="sudo pacman -Syu && yay -Syu"
 
 alias bc="bc -lq"
 alias cat=bat
