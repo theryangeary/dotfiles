@@ -38,7 +38,7 @@ if [ -d "$HOME/.cargo/bin" ] ; then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-
+dbus-update-activation-environment DISPLAY XAUTHORITY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   sway
 fi
