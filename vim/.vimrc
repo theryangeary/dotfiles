@@ -70,7 +70,7 @@ augroup END
 
 augroup ctagsautogenerate
   autocmd!
-  autocmd BufWrite *.c,*.cpp,*.h,*.hpp :silent! !ctags -R .
+  autocmd BufWrite *.c,*.cpp,*.h,*.hpp :silent! if getcwd() == $HOME | !ctags -R . | endif
 augroup END
 
 augroup filetypecmds
