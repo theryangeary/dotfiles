@@ -84,8 +84,10 @@ augroup filetypecmds
   autocmd FileType rust :nnoremap <F4> :!RUST_BACKTRACE=full cargo run<cr>
   autocmd FileType tex :nnoremap <cr> :execute "!pdflatex % && mupdf" expand('%:t:r') . ".pdf"<cr>
   autocmd FileType vim :nnoremap <cr> :source %<cr>
+  autocmd FileType python :nnoremap <cr> :!python3 %<cr>
   autocmd FileType json syntax match Comment +\/\/.\+$+
   autocmd FileType c,cpp :nnoremap <cr> :!gcc % && ./a.out |
+  autocmd FileType hsq :nnoremap <cr> :!hsq %<cr>
   autocmd FileType html :nnoremap <cr> :!xdg-open %<cr>
 augroup END
 
