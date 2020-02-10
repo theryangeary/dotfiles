@@ -40,7 +40,6 @@ alias u="sudo pacman -Syu && yay -Syu"
 alias bc="bc -lq"
 alias cat=bat
 alias docker="sudo docker"
-alias gp!="$(gp |& grep git)"
 alias k="killall"
 alias python="$(which python3)"
 alias reset_audio="systemctl status | grep \"/usr/bin/pulseaudio\" | grep -o \"[[:digit:]]\\+\" | head -1 | xargs kill -9"
