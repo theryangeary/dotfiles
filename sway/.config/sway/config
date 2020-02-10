@@ -286,6 +286,6 @@ client.urgent           $base02 $base08    $base00 $base0F   $base02
 gaps inner 10
 exec_always killall mako && mako --anchor bottom-center --default-timeout 5000 --background-color=$base01 --text-color=$base07
 exec guake
-exec libinput-gestures-setup start
+exec_always libinput-gestures-setup restart
 exec swaybg -c "$bg"
 exec_always --no-startup-id flashfocus
