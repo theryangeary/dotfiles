@@ -76,6 +76,7 @@ augroup END
 augroup filetypecmds
   autocmd!
   autocmd FileType markdown :nnoremap <cr> :execute "!pandoc -F pandoc-crossref % -o /tmp/out.pdf && xdg-open /tmp/out.pdf"<cr>
+  autocmd FileType * :nnoremap <F1> :call CocAction('format')<cr>
   "autocmd FileType rust :nnoremap <cr> :!RUST_BACKTRACE=1 cargo run<cr>
   autocmd FileType rust :nnoremap <cr> :!cargo test<cr>
   autocmd FileType rust :nnoremap <F1> :RustFmt<cr>
