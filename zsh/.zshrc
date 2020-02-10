@@ -7,11 +7,11 @@ DISABLE_UPDATE_PROMPT="true"
 ENABLE_CORRECTION="true"
 
 plugins=(
-	git
-	docker
-	pass
-	zsh-autosuggestions
-	zsh-syntax-highlighting
+  git
+  docker
+  pass
+  zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
