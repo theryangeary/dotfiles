@@ -79,7 +79,6 @@ augroup filetypecmds
   autocmd FileType * :nnoremap <F1> :call CocAction('format')<cr>
   "autocmd FileType rust :nnoremap <cr> :!RUST_BACKTRACE=1 cargo run<cr>
   autocmd FileType rust :nnoremap <cr> :!cargo test<cr>
-  autocmd FileType rust :nnoremap <F1> :RustFmt<cr>
   autocmd FileType rust :nnoremap <F2> :!cargo run<cr>
   autocmd FileType rust :nnoremap <F3> :!RUST_BACKTRACE=1 cargo run<cr>
   autocmd FileType rust :nnoremap <F4> :!RUST_BACKTRACE=full cargo run<cr>
