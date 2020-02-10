@@ -128,6 +128,7 @@ nnoremap <silent> <leader>cos  :<C-u>CocList -I symbols<cr>| " Search workspace 
 nnoremap <leader>fe :edit |
 nnoremap <leader>ff :FZF<cr>| " Find file
 nnoremap <leader>fs :write<cr>|
+nnoremap <leader><leader> :write<cr>|
 nnoremap <leader>fve :edit ~/.vimrc<cr>|
 nnoremap <leader>fvs :source ~/.vimrc<cr>|
 nnoremap <leader>qq :q<cr>|
