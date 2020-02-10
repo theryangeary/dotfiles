@@ -38,6 +38,11 @@ if [ -d "$HOME/.cargo/bin" ] ; then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+# set PATH so it includes gem if it exists for vimgolf
+if [ -d "$HOME/.cargo/bin" ] ; then
+  export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
+fi
+
 dbus-update-activation-environment DISPLAY XAUTHORITY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   sway
