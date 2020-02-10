@@ -101,6 +101,12 @@ function z() {
 }
 alias z="z"
 
+function bt() {
+  rfkill unblock bluetooth
+  bluetoothctl -- power on
+  bluetoothctl --timeout 5 -- connect 00:FA:21:81:BB:0E
+}
+
 cdpath=( ~/repos ~/school/2019fall ~/ctf )
 
 if [ -z "$TMUX" ]; then
