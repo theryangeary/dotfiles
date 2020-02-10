@@ -41,6 +41,7 @@ alias bc="bc -lq"
 alias cat=bat
 alias docker="sudo docker"
 alias k="killall"
+alias psag="ps aux | grep"
 alias python="$(which python3)"
 alias reset_audio="systemctl status | grep \"/usr/bin/pulseaudio\" | grep -o \"[[:digit:]]\\+\" | head -1 | xargs kill -9"
 alias sshap="ssh -p 58354 ryan@antoninus-pius.duckdns.org"
