@@ -43,6 +43,11 @@ if [ -d "$HOME/.gem/ruby/2.7.0/bin" ] ; then
   export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 fi
 
+# set PATH so it includes flamegraph if it exists
+if [ -d "$HOME/repos/flamegraph" ] ; then
+  export PATH="$HOME/repos/flamegraph:$PATH"
+fi
+
 dbus-update-activation-environment DISPLAY XAUTHORITY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   sway
