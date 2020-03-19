@@ -53,6 +53,8 @@ alias zshrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 alias tmuxrc="$EDITOR ~/.tmux.conf && tmux source-file ~/.tmux.conf"
 alias swayrc="$EDITOR ~/.config/sway/config"
 alias i3statusrc="$EDITOR ~/.config/i3status/config"
+alias grd="./gradlew"
+
 
 function lsA() {
   if [ $PWD = $HOME ];
