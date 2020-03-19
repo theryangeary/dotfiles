@@ -26,6 +26,7 @@ bindkey -s \^L 'clear && clear\n'
 export SAVEHIST=500000
 export EDITOR="nvim"
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export LESS="-F -X $LESS"
 
 open () {xdg-open $* &}
 alias o="open"
