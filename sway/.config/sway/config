@@ -266,8 +266,8 @@ bindsym XF86AudioPrev exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer
 bindsym XF86AudioNext exec "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 2 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
 
 # Float windows
 for_window [title="Calculator"] floating enable
