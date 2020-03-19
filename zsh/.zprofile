@@ -39,7 +39,7 @@ if [ -d "$HOME/.cargo/bin" ] ; then
 fi
 
 # set PATH so it includes gem if it exists for vimgolf
-if [ -d "$HOME/.cargo/bin" ] ; then
+if [ -d "$HOME/.gem/ruby/2.7.0/bin" ] ; then
   export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
 fi
 
