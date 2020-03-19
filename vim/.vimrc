@@ -89,6 +89,7 @@ augroup filetypecmds
   autocmd FileType c,cpp :nnoremap <cr> :!gcc % && ./a.out |
   autocmd FileType hsq :nnoremap <cr> :!hsq %<cr>
   autocmd FileType html :nnoremap <cr> :!xdg-open %<cr>
+  autocmd FileType java :nnoremap <cr> :!./gradlew installDist<cr>
 augroup END
 
 " }}}
