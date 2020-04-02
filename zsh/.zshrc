@@ -111,12 +111,12 @@ function bt() {
 }
 alias galaxy-buds="bt"
 
-function bt_wh() {
+function bt-wh() {
   rfkill unblock bluetooth
   bluetoothctl -- power on
   bluetoothctl --timeout 5 -- connect 00:FA:21:81:BB:0E
 }
-alias sony="bt_wh"
+alias sony="bt-wh"
 
 cdpath=( ~/repos ~/school/2019fall ~/ctf )
 
