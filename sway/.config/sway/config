@@ -212,14 +212,15 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-mode "L: lock" {
-    bindsym l exec swaylock
+mode "L: lock\tE: exit" {
+    bindsym l exec swaylock && swaymsg mode "default"
+    bindsym e exec swaymsg exit
 
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+Escape mode "L: lock"
+bindsym $mod+Escape mode "L: lock\tE: exit"
 
 #
 # Status Bar:
