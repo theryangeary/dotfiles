@@ -118,6 +118,10 @@ function bt-wh() {
 }
 alias sony="bt-wh"
 
+function bak() {
+  cp $1 $1.bak
+}
+
 cdpath=( ~/repos ~/school/2019fall ~/ctf )
 
 if [ -z "$TMUX" ]; then
