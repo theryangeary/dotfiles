@@ -9,9 +9,6 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term alacritty
-# Your preferred application launcher
-# Note: it's recommended that you pass the final command to sway
-set $menu dmenu_path | dmenu | xargs swaymsg exec --
 # Colors
 set $base00 #101218
 set $base01 #303030
@@ -29,7 +26,10 @@ set $base0C #97e0ff
 set $base0D #97bbf7
 set $base0E #c0b7f9
 set $base0F #fcc09e
-set $bg #d1add1
+set $bg #303030
+# Your preferred application launcher
+# Note: it's recommended that you pass the final command to sway
+set $menu dmenu_path | bemenu -l 20 -p '' -n -i --fn "Source Code Pro 12" --hb "$base01" | xargs swaymsg exec --
 
 ### Output configuration
 #
