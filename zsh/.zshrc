@@ -114,7 +114,7 @@ alias galaxy-buds="bt"
 function bt-wh() {
   rfkill unblock bluetooth
   bluetoothctl -- power on
-  bluetoothctl --timeout 5 -- connect 00:FA:21:81:BB:0E
+  bluetoothctl --timeout 5 -- connect 38:18:4C:BD:A0:65
 }
 alias sony="bt-wh"
 
