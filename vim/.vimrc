@@ -38,8 +38,10 @@ set showbreak=↪
 set splitbelow
 set splitright
 
-let g:light_colorscheme = "solarized8_light_low"
-let g:dark_colorscheme = "solarized8_dark"
+set mouse=a
+
+let g:light_colorscheme = "iceberg"
+let g:dark_colorscheme = "iceberg"
 
 " }}}
 
