@@ -285,7 +285,7 @@ client.unfocused        $base02 $base02    $base03 $base0F   $base02
 client.urgent           $base02 $base08    $base00 $base0F   $base02
 
 # Startup commands
-gaps inner 10
+gaps inner 0
 exec_always mako --anchor bottom-center --default-timeout 5000 --background-color=$base01 --text-color=$base07
 exec guake
 exec_always libinput-gestures-setup start
