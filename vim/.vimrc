@@ -40,9 +40,6 @@ set splitright
 
 set mouse=a
 
-let g:light_colorscheme = "iceberg"
-let g:dark_colorscheme = "iceberg"
-
 " }}}
 
 " autocommands {{{
@@ -61,7 +58,8 @@ augroup vimrc
 
   autocmd VimEnter * :call airline#add_statusline_func('WindowNumber')
   autocmd VimEnter * :call airline#add_inactive_statusline_func('WindowNumber')
-  autocmd VimEnter * SetColorScheme
+  autocmd VimEnter * colorscheme gruvbox
+  autocmd VimEnter * AirlineTheme gruvbox
 augroup END
 
 augroup cursorlinectl
@@ -242,7 +240,8 @@ Plugin 'https://github.com/vim-airline/vim-airline-themes'
 Plugin 'https://github.com/VundleVim/Vundle.vim'
 Plugin 'https://github.com/wellle/targets.vim'
 Plugin 'https://github.com/neoclide/coc.nvim'
-Plugin 'https://github.com/theryangeary/sunset'
+"Plugin 'https://github.com/theryangeary/sunset'
+Plugin 'https://github.com/morhetz/gruvbox'
 
 call vundle#end()
 
@@ -288,21 +287,6 @@ let g:sunset_utc_offset = -4
 " }}}
 
 " Functions {{{
-
-" Set color scheme based on &background
-function! SetColorScheme()
-  if &background == "dark"
-    "colorscheme xoria256
-    "colorscheme solarized8_dark
-    execute "colorscheme" g:dark_colorscheme
-    AirlineTheme dark
-  elseif &background == "light"
-    execute "colorscheme" g:light_colorscheme
-    "colorscheme oceanlight
-    AirlineTheme light
-  endif
-endfunction
-command! SetColorScheme :call SetColorScheme()
 
 " Airline statusbar config
 function! WindowNumber(...)
