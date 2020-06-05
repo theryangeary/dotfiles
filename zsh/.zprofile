@@ -15,6 +15,7 @@ export MOZ_ENABLE_WAYLAND=1
 export MOZ_DBUS_REMOTE=1
 
 export BEMENU_OPTS="-l 20 -p '' -n -i --fn 'Source Code Pro 12'"
+export BAT_THEME="Solarized (light)"
 
 #export XDG_RUNTIME_DIR="/tmp"
 export XDG_RUNTIME_DIR="/tmp/xdg_runtime_dir"
