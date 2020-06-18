@@ -1,5 +1,5 @@
 
-export ZSH="/home/ryan/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
 HYPHEN_INSENSITIVE="true"
@@ -10,15 +10,16 @@ plugins=(
   git
   docker
   pass
-  zsh-autosuggestions
-  zsh-syntax-highlighting
 )
 
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+[[ -r "$HOME/.zsh/z" ]] && source $HOME/.zsh/z
+source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source $ZSH/oh-my-zsh.sh
 source /usr/share/fzf/key-bindings.zsh
 source /usr/share/fzf/completion.zsh
+
+source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 bindkey \^U backward-kill-line
 bindkey -s \^L 'clear && clear\n'
