@@ -96,6 +96,10 @@ function gco() {
   fi
 }
 
+function gpp() {
+  $(git push |& grep git)
+}
+
 function z() {
   _z 2>&1 $@
   if [ $# -ne 0 ]; then
