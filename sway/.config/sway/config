@@ -281,11 +281,11 @@ for_window [title="Calculator"] floating enable
 for_window [title="Slack.*"] floating enable
 for_window [class="zoom"] floating enable
 
-default_border none
+default_border pixel
 
 # Window Colours
 #                       border  background text    indicator child_border
-client.focused          $base07 $base01    $base07 $base0F   $base01
+client.focused          $base07 $base01    $base07 $base0F   $base07
 client.focused_inactive $base02 $base02    $base03 $base0F   $base02
 client.unfocused        $base02 $base02    $base03 $base0F   $base02
 client.urgent           $base02 $base08    $base00 $base0F   $base02
