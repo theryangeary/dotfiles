@@ -12,12 +12,12 @@ plugins=(
   pass
 )
 
-[[ -r "$HOME/.zsh/z" ]] && source $HOME/.zsh/z
+[[ -r "$HOME/.zsh/z.sh" ]] && source $HOME/.zsh/z.sh
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source $ZSH/oh-my-zsh.sh
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -56,7 +56,6 @@ alias tmuxrc="$EDITOR ~/.tmux.conf && tmux source-file ~/.tmux.conf"
 alias swayrc="$EDITOR ~/.config/sway/config"
 alias i3statusrc="$EDITOR ~/.config/i3status/config"
 alias grd="./gradlew"
-
 
 function lsA() {
   if [ $PWD = $HOME ];

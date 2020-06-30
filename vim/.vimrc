@@ -212,6 +212,7 @@ nnoremap <leader>w | " Make all window bindings easily available
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.fzf
 call vundle#begin()
 
 Plugin 'https://github.com/bronson/vim-trailing-whitespace'
