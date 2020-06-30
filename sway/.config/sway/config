@@ -52,11 +52,17 @@ exec swayidle -w before-sleep 'swaylock -f -c "$bg"'
 
 
 ### Input configuration
-input "2:7:SynPS/2_Synaptics_TouchPad" {
+input type:touchpad {
 	dwt enabled
 	tap enabled
 	natural_scroll enabled
     middle_emulation disabled
+}
+
+input type:keyboard {
+    xkb_options altwin:alt_super_win,ctrl:nocaps
+    repeat_delay 170
+    repeat_rate 40
 }
 
 input "1:1:AT_Translated_Set_2_keyboard" {
