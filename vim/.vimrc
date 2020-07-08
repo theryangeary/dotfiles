@@ -128,6 +128,7 @@ nnoremap <silent> <leader>cos  :<C-u>CocList -I symbols<cr>| " Search workspace 
 " Files
 nnoremap <leader>fe :edit |
 nnoremap <leader>ff :FZF<cr>| " Find file
+nnoremap <leader>fr :RG<cr>| " Use rg to find file contents
 nnoremap <leader>fs :write<cr>|
 nnoremap <leader><leader> :write<cr>|
 nnoremap <leader>fve :edit ~/.vimrc<cr>|
@@ -285,6 +286,8 @@ let g:sunset_utc_offset = -4
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
+let g:fzf_layout = {'down': '75%'}
+
 " }}}
 
 " Functions {{{
@@ -324,6 +327,15 @@ function! VundleAppendPlugin()
   write
   normal! `M
 endfunction
+
+function! RipgrepFzf(query, fullscreen)
+  let cmd_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_cmd = printf(cmd_fmt, shellescape(a:query))
+  let reload_cmd = printf(cmd_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_cmd]}
+  call fzf#vim#grep(initial_cmd, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 " }}}
 

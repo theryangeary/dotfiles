@@ -26,7 +26,7 @@ bindkey -s \^L 'clear && clear\n'
 
 export SAVEHIST=500000
 export EDITOR="nvim"
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+export FZF_DEFAULT_OPTS='--height 75% --layout=reverse --border'
 export LESS="-F -X $LESS"
 
 open () {xdg-open $* &}
@@ -42,6 +42,7 @@ alias u="sudo pacman -Syu && yay -Syu"
 alias bc="bc -lq"
 alias cat=bat
 alias docker="sudo docker"
+alias e="search"
 alias k="killall"
 alias psag="ps aux | grep"
 alias python="$(which python3)"
@@ -127,6 +128,10 @@ function bak() {
 }
 
 cdpath=( ~/repos ~/school/2019fall ~/ctf )
+
+function search() {
+  vim +$(rg --line-number '.' | sed -e 's/:/ /; s/:/ /' | awk '{if ($2>20) { $2 = $2 " " $2-20} else { $2 = $2 " " 0}; print $0}' | fzf --height=100% --preview "bat -r {3}: --highlight-line {2} --style=numbers,changes --color always {1}" | awk '{print $2 " " $1}')
+}
 
 if [ -z "$TMUX" ]; then
   exec tmux
