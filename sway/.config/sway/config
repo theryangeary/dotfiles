@@ -296,4 +296,4 @@ exec_always mako --anchor bottom-center --default-timeout 5000 --background-colo
 exec guake
 exec_always libinput-gestures-setup start
 exec swaybg -c "$bg"
-exec_always --no-startup-id flashfocus
+exec xrdb -load ~/.Xresources
