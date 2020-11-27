@@ -4,69 +4,6 @@
 [submodule "zsh/.zsh/zsh-syntax-highlighting"]
 	path = zsh/.zsh/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
-[submodule "vim/.vim/bundle/coc.nvim"]
-	path = vim/.vim/bundle/coc.nvim
-	url = https://github.com/neoclide/coc.nvim
-[submodule "vim/.vim/bundle/fzf.vim"]
-	path = vim/.vim/bundle/fzf.vim
-	url = https://github.com/junegunn/fzf.vim
-[submodule "vim/.vim/bundle/gruvbox"]
-	path = vim/.vim/bundle/gruvbox
-	url = https://github.com/morhetz/gruvbox
-[submodule "vim/.vim/bundle/neoterm"]
-	path = vim/.vim/bundle/neoterm
-	url = https://github.com/kassio/neoterm
-[submodule "vim/.vim/bundle/nerdcommenter"]
-	path = vim/.vim/bundle/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter
-[submodule "vim/.vim/bundle/nerdtree"]
-	path = vim/.vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree
-[submodule "vim/.vim/bundle/rust.vim"]
-	path = vim/.vim/bundle/rust.vim
-	url = https://github.com/rust-lang/rust.vim
-[submodule "vim/.vim/bundle/take-me-to-your-leader"]
-	path = vim/.vim/bundle/take-me-to-your-leader
-	url = https://github.com/theryangeary/take-me-to-your-leader
-[submodule "vim/.vim/bundle/targets.vim"]
-	path = vim/.vim/bundle/targets.vim
-	url = https://github.com/wellle/targets.vim
-[submodule "vim/.vim/bundle/vim-abolish"]
-	path = vim/.vim/bundle/vim-abolish
-	url = https://github.com/tpope/vim-abolish
-[submodule "vim/.vim/bundle/vim-airline"]
-	path = vim/.vim/bundle/vim-airline
-	url = https://github.com/vim-airline/vim-airline
-[submodule "vim/.vim/bundle/vim-airline-themes"]
-	path = vim/.vim/bundle/vim-airline-themes
-	url = https://github.com/vim-airline/vim-airline-themes
-[submodule "vim/.vim/bundle/vim-colorschemes"]
-	path = vim/.vim/bundle/vim-colorschemes
-	url = https://github.com/flazz/vim-colorschemes
-[submodule "vim/.vim/bundle/vim-fugitive"]
-	path = vim/.vim/bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive
-[submodule "vim/.vim/bundle/vim-markdown-preview"]
-	path = vim/.vim/bundle/vim-markdown-preview
-	url = https://github.com/JamshedVesuna/vim-markdown-preview
-[submodule "vim/.vim/bundle/vim-multiple-cursors"]
-	path = vim/.vim/bundle/vim-multiple-cursors
-	url = https://github.com/terryma/vim-multiple-cursors
-[submodule "vim/.vim/bundle/vim-pasta"]
-	path = vim/.vim/bundle/vim-pasta
-	url = https://github.com/sickill/vim-pasta
-[submodule "vim/.vim/bundle/vim-rhubarb"]
-	path = vim/.vim/bundle/vim-rhubarb
-	url = https://github.com/tpope/vim-rhubarb
-[submodule "vim/.vim/bundle/vim-surround"]
-	path = vim/.vim/bundle/vim-surround
-	url = https://github.com/tpope/vim-surround
-[submodule "vim/.vim/bundle/vim-trailing-whitespace"]
-	path = vim/.vim/bundle/vim-trailing-whitespace
-	url = https://github.com/bronson/vim-trailing-whitespace
-[submodule "vim/.vim/bundle/vim-unimpaired"]
-	path = vim/.vim/bundle/vim-unimpaired
-	url = https://github.com/tpope/vim-unimpaired
 [submodule "vim/.vim/bundle/Vundle.vim"]
 	path = vim/.vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim

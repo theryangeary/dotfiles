@@ -22,7 +22,7 @@ set lazyredraw " don't redraw in the middle of macros
 set showmatch " highlight matching [{()}]
 
 set incsearch
-set inccommand=nosplit
+"set inccommand=nosplit
 set hlsearch
 
 set expandtab
@@ -38,6 +38,7 @@ set showbreak=↪
 set splitbelow
 set splitright
 
+set background=dark
 set mouse=a
 
 " }}}
@@ -76,7 +77,6 @@ augroup END
 augroup filetypecmds
   autocmd!
   autocmd FileType markdown :nnoremap <cr> :execute "!pandoc -F pandoc-crossref % -o /tmp/out.pdf && xdg-open /tmp/out.pdf"<cr>
-  autocmd FileType * :nnoremap <F1> :call CocAction('format')<cr>
   "autocmd FileType rust :nnoremap <cr> :!RUST_BACKTRACE=1 cargo run<cr>
   autocmd FileType rust :nnoremap <cr> :!cargo test<cr>
   autocmd FileType rust :nnoremap <F2> :!cargo run<cr>
@@ -217,29 +217,21 @@ set rtp+=~/.fzf
 call vundle#begin()
 
 Plugin 'https://github.com/bronson/vim-trailing-whitespace'
-"Plugin 'https://github.com/ervandew/supertab'
-Plugin 'https://github.com/flazz/vim-colorschemes'
-Plugin 'https://github.com/JamshedVesuna/vim-markdown-preview'
 Plugin 'https://github.com/junegunn/fzf.vim'
-Plugin 'https://github.com/kassio/neoterm'
 Plugin 'https://github.com/rust-lang/rust.vim'
 Plugin 'https://github.com/scrooloose/nerdcommenter'
 Plugin 'https://github.com/scrooloose/nerdtree'
 Plugin 'https://github.com/sickill/vim-pasta'
-Plugin 'https://github.com/terryma/vim-multiple-cursors'
 Plugin 'https://github.com/theryangeary/take-me-to-your-leader'
 Plugin 'https://github.com/tpope/vim-abolish'
 Plugin 'https://github.com/tpope/vim-fugitive'
 Plugin 'https://github.com/tpope/vim-rhubarb'
 Plugin 'https://github.com/tpope/vim-surround'
 Plugin 'https://github.com/tpope/vim-unimpaired'
-"Plugin 'https://github.com/Valloric/YouCompleteMe'
 Plugin 'https://github.com/vim-airline/vim-airline'
 Plugin 'https://github.com/vim-airline/vim-airline-themes'
-"Plugin 'https://github.com/vim-syntastic/syntastic'
 Plugin 'https://github.com/VundleVim/Vundle.vim'
 Plugin 'https://github.com/wellle/targets.vim'
-Plugin 'https://github.com/neoclide/coc.nvim'
 "Plugin 'https://github.com/theryangeary/sunset'
 Plugin 'https://github.com/morhetz/gruvbox'
 
@@ -250,10 +242,6 @@ call vundle#end()
 " Post-Vundle stuff {{{
 " Config that has to come after Vundle
 set termguicolors
-
-" Use 256 colours (Use this setting only if your terminal supports 256 colours)
-set t_Co=256
-
 
 " unicode symbols
 if !exists('g:airline_symbols')
@@ -274,15 +262,6 @@ let vim_markdown_preview_github=1
 let g:sunset_latitude = 40.712776
 let g:sunset_longitude = -74.005974
 let g:sunset_utc_offset = -4
-
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
 
 let g:fzf_layout = {'down': '75%'}
 
@@ -334,124 +313,6 @@ function! RipgrepFzf(query, fullscreen)
   call fzf#vim#grep(initial_cmd, 1, fzf#vim#with_preview(spec), a:fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
-" }}}
-
-" Coc.nvim {{{
-
-" if hidden is not set, TextEdit might fail.
-set hidden
-
-" Some servers have issues with backup files, see #649
-set nobackup
-set nowritebackup
-
-" Better display for messages
-set cmdheight=2
-
-" You will have bad experience for diagnostic messages when it's default 4000.
-set updatetime=300
-
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-
-" always show signcolumns
-set signcolumn=yes
-
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-" Or use `complete_info` if your vim support it, like:
-" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
-
-" Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap for do codeAction of current line
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Create mappings for function text object, requires document symbols feature of languageserver.
-
-xmap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap if <Plug>(coc-funcobj-i)
-omap af <Plug>(coc-funcobj-a)
-
-" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
-" DISABLED BECAUSE nO YOU CAN'T TAKE MY <C-D> i _NEED_ THAT
-"nmap <silent> <C-d> <Plug>(coc-range-select)
-"xmap <silent> <C-d> <Plug>(coc-range-select)
-
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
-
-" Use `:Fold` to fold current buffer
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" use `:OR` for organize import of current buffer
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 
 " }}}
 
