@@ -1,3 +1,9 @@
+" set encoding {{{
+set encoding=utf-8
+scriptencoding utf-8
+
+" }}}
+
 " basic settings {{{
 set nocompatible " Don't try to be backwards compatible with vi
 
