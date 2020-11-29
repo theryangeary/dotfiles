@@ -1,9 +1,9 @@
-default: stow vim tmux
+targets := $(shell find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | grep -v .git)
 
-stow:
-	find . -mindepth 1 -maxdepth 1 -type d -printf '%f\n' \
-	  | grep -v .git \
-	  | xargs stow
+default: $(targets)
+
+$(targets):
+	stow $@
 
 vim:
 	stow vim
@@ -13,4 +13,4 @@ tmux:
 	stow tmux
 	tmux new '~/.tmux/plugins/tpm/bin/install_plugins'
 
-.PHONY: stow vim tmux
+.PHONY: $(targets)
