@@ -11,7 +11,7 @@ RUN apt update \
     stow
 
 # install most current vim
-RUN git clone http://github.com/vim/vim.git && cd vim && cd src && make && make install
+RUN git clone https://github.com/vim/vim.git/ && cd vim && cd src && make && make install
 
 # create a non-root user for a more typical /home directory structure
 RUN useradd -ms /bin/bash user
@@ -22,7 +22,8 @@ WORKDIR /home/user
 RUN rm .bashrc
 
 # get sources
-RUN git clone --recurse-submodules http://github.com/theryangeary/dotfiles
+RUN mkdir dotfiles
+COPY --chown=user . dotfiles
 WORKDIR dotfiles
 
 # stow dotfiles
