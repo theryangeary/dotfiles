@@ -8,7 +8,8 @@ RUN apt update \
     gcc \
     libncurses5-dev \
     make \
-    stow
+    stow \
+    tmux
 
 # install most current vim
 RUN git clone https://github.com/vim/vim.git/ && cd vim && cd src && make && make install
