@@ -28,4 +28,4 @@ COPY --chown=user . dotfiles
 WORKDIR dotfiles
 
 # stow dotfiles
-RUN make
+CMD make
