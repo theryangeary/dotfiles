@@ -41,7 +41,6 @@ alias u="sudo pacman -Syu && yay -Syu"
 
 alias bc="bc -lq"
 alias cat=bat
-alias docker="sudo docker"
 alias e="search"
 alias k="killall"
 alias psag="ps aux | grep"
