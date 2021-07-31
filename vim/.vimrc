@@ -46,7 +46,22 @@ set splitright
 
 set background=dark
 set mouse=a
+set ttymouse=sgr
 
+" }}}
+
+" Preload ALE config {{{
+let g:ale_linters = {'rust': ['analyzer', 'cargo', 'rls', 'rustc']}
+let g:ale_fixers = {'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines']}
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_autoimport = 1
+let g:ale_set_balloons = 1
+let g:ale_set_highlights = 1
+nnoremap gd :ALEGoToDefinition<cr>
+nmap <silent> <C-n> <Plug>(ale_next_wrap)
+nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 " }}}
 
 " autocommands {{{
@@ -135,8 +150,8 @@ nnoremap <silent> <leader>cos  :<C-u>CocList -I symbols<cr>| " Search workspace 
 nnoremap <leader>fe :edit |
 nnoremap <leader>ff :FZF<cr>| " Find file
 nnoremap <leader>fr :RG<cr>| " Use rg to find file contents
-nnoremap <leader>fs :write<cr>|
-nnoremap <leader><leader> :write<cr>|
+nnoremap <leader>fs :update<cr>|
+nnoremap <leader><leader> :update<cr>|
 nnoremap <leader>fve :edit ~/.vimrc<cr>|
 nnoremap <leader>fvs :source ~/.vimrc<cr>|
 nnoremap <leader>qq :q<cr>|
@@ -224,11 +239,11 @@ call vundle#begin()
 
 Plugin 'https://github.com/bronson/vim-trailing-whitespace'
 Plugin 'https://github.com/junegunn/fzf.vim'
+Plugin 'https://github.com/dense-analysis/ale'
 Plugin 'https://github.com/rust-lang/rust.vim'
 Plugin 'https://github.com/scrooloose/nerdcommenter'
 Plugin 'https://github.com/scrooloose/nerdtree'
 Plugin 'https://github.com/sickill/vim-pasta'
-Plugin 'https://github.com/theryangeary/take-me-to-your-leader'
 Plugin 'https://github.com/tpope/vim-abolish'
 Plugin 'https://github.com/tpope/vim-fugitive'
 Plugin 'https://github.com/tpope/vim-rhubarb'
@@ -270,8 +285,10 @@ let g:sunset_longitude = -74.005974
 let g:sunset_utc_offset = -4
 
 let g:fzf_layout = {'down': '75%'}
-
 " }}}
+
+highlight ALEError ctermbg=none cterm=underline " allow underlining in terminal
+highlight ALEWarning ctermbg=none cterm=underline " allow underlining in terminal
 
 " Functions {{{
 
