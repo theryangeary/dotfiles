@@ -122,6 +122,7 @@ augroup END
 " escape is too far
 inoremap jk <Esc>:w<cr>
 inoremap kj <Esc>:w<cr>
+inoremap <Esc> <Esc>:w<cr>
 
 " }}}
 
@@ -285,6 +286,9 @@ let g:sunset_longitude = -74.005974
 let g:sunset_utc_offset = -4
 
 let g:fzf_layout = {'down': '75%'}
+
+let g:rustfmt_autosave = 1
+let g:rustfmt_fail_silently
 " }}}
 
 highlight ALEError ctermbg=none cterm=underline " allow underlining in terminal
