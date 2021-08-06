@@ -25,7 +25,7 @@ bindkey \^U backward-kill-line
 bindkey -s \^L 'clear && clear\n'
 
 export SAVEHIST=500000
-export EDITOR="vim"
+export EDITOR="nvim"
 export FZF_DEFAULT_OPTS='--height 75% --layout=reverse --border'
 export LESS="-F -X $LESS"
 
@@ -49,6 +49,7 @@ alias reset_audio="systemctl status | grep \"/usr/bin/pulseaudio\" | grep -o \"[
 alias sshap="ssh -p 58354 ryan@antoninus-pius.duckdns.org"
 alias sw="telnet towel.blinkenlights.nl"
 alias weather="curl wttr.in | grep -v @igor_chubin"
+alias vim="$EDITOR"
 alias vimrc="$EDITOR ~/.vimrc"
 alias zshrc="$EDITOR ~/.zshrc && source ~/.zshrc"
 alias tmuxrc="$EDITOR ~/.tmux.conf && tmux source-file ~/.tmux.conf"

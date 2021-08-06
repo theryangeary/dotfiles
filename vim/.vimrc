@@ -46,22 +46,10 @@ set splitright
 
 set background=dark
 set mouse=a
-set ttymouse=sgr
 
-" }}}
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
 
-" Preload ALE config {{{
-let g:ale_linters = {'rust': ['analyzer', 'cargo', 'rls', 'rustc']}
-let g:ale_fixers = {'rust': ['rustfmt', 'trim_whitespace', 'remove_trailing_lines']}
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
-set omnifunc=ale#completion#OmniFunc
-let g:ale_completion_autoimport = 1
-let g:ale_set_balloons = 1
-let g:ale_set_highlights = 1
-nnoremap gd :ALEGoToDefinition<cr>
-nmap <silent> <C-n> <Plug>(ale_next_wrap)
-nmap <silent> <C-p> <Plug>(ale_previous_wrap)
 " }}}
 
 " autocommands {{{
@@ -117,12 +105,18 @@ augroup END
 
 " basic mappings {{{
 
-"nnoremap <Esc> :noh<cr>:echo<cr><Esc>
-
 " escape is too far
 inoremap jk <Esc>:w<cr>
 inoremap kj <Esc>:w<cr>
 inoremap <Esc> <Esc>:w<cr>
+
+" Use <Tab> and <S-Tab> to navigate through popup menu
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" use <Tab> as trigger keys
+imap <Tab> <Plug>(completion_smart_tab)
+imap <S-Tab> <Plug>(completion_smart_s_tab)
 
 " }}}
 
@@ -137,16 +131,6 @@ nnoremap <leader><TAB> | " Go to previous buffer
 nnoremap <silent> <leader>bd :bdelete<cr>|
 nnoremap <leader>bl :ls<cr>:buffer<space>|
 
-" Coc
-nnoremap <silent> <leader>coa  :<C-u>CocList diagnostics<cr>| " Show all diagnostics
-nnoremap <silent> <leader>coc  :<C-u>CocList commands<cr>| " Show commands
-nnoremap <silent> <leader>coe  :<C-u>CocList extensions<cr>| " Manage extensions
-nnoremap <silent> <leader>coj  :<C-u>CocNext<CR>| " Do default action for next item.
-nnoremap <silent> <leader>cok  :<C-u>CocPrev<CR>| " Do default action for previous item.
-nnoremap <silent> <leader>coo  :<C-u>CocList outline<cr>| " Find symbol of current document
-nnoremap <silent> <leader>cop  :<C-u>CocListResume<CR>| " Resume latest coc list
-nnoremap <silent> <leader>cos  :<C-u>CocList -I symbols<cr>| " Search workspace symbols
-
 " Files
 nnoremap <leader>fe :edit |
 nnoremap <leader>ff :FZF<cr>| " Find file
@@ -154,7 +138,8 @@ nnoremap <leader>fr :RG<cr>| " Use rg to find file contents
 nnoremap <leader>fs :update<cr>|
 nnoremap <leader><leader> :update<cr>|
 nnoremap <leader>fve :edit ~/.vimrc<cr>|
-nnoremap <leader>fvs :source ~/.vimrc<cr>|
+nnoremap <leader>fvn :edit ~/.config/nvim/init.vim<cr>|
+nnoremap <leader>fvs :source $MYVIMRC<cr>|
 nnoremap <leader>qq :q<cr>|
 
 " Fold
@@ -171,6 +156,7 @@ nnoremap <leader>gs :Gstatus<cr>| " Open fugitive git status buffer
 " Make
 nnoremap <leader>mc :make clean<cr><cr>|
 nnoremap <leader>md :make<cr>| " make (default)
+nnoremap <leader>mm :make |
 nnoremap <leader>sop :source %<cr>| " source current file
 
 " NERDTree
@@ -228,6 +214,16 @@ nnoremap <leader>7 :exe 7  . "wincmd w"<cr>| " Go to window number 7
 nnoremap <leader>8 :exe 8  . "wincmd w"<cr>| " Go to window number 8
 nnoremap <leader>9 :exe 9  . "wincmd w"<cr>| " Go to window number 9
 nnoremap <leader>w | " Make all window bindings easily available
+nnoremap <leader>wC1 :1close<cr>| " Close window 1 without focusing it
+nnoremap <leader>wC2 :2close<cr>| " Close window 2 without focusing it
+nnoremap <leader>wC3 :3close<cr>| " Close window 3 without focusing it
+nnoremap <leader>wC4 :4close<cr>| " Close window 4 without focusing it
+nnoremap <leader>wC5 :5close<cr>| " Close window 5 without focusing it
+nnoremap <leader>wC6 :6close<cr>| " Close window 6 without focusing it
+nnoremap <leader>wC7 :7close<cr>| " Close window 7 without focusing it
+nnoremap <leader>wC8 :8close<cr>| " Close window 8 without focusing it
+nnoremap <leader>wC9 :9close<cr>| " Close window 9 without focusing it
+nnoremap <leader>wC0 :10close<cr>| " Close window 10 without focusing it
 
 " leader-end }}}
 
@@ -238,9 +234,12 @@ set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.fzf
 call vundle#begin()
 
+Plugin 'https://github.com/neovim/nvim-lspconfig'
+Plugin 'https://github.com/nvim-lua/lsp_extensions.nvim'
+Plugin 'https://github.com/nvim-lua/completion-nvim'
+Plugin 'https://github.com/folke/lsp-colors.nvim'
 Plugin 'https://github.com/bronson/vim-trailing-whitespace'
 Plugin 'https://github.com/junegunn/fzf.vim'
-Plugin 'https://github.com/dense-analysis/ale'
 Plugin 'https://github.com/rust-lang/rust.vim'
 Plugin 'https://github.com/scrooloose/nerdcommenter'
 Plugin 'https://github.com/scrooloose/nerdtree'
@@ -288,11 +287,8 @@ let g:sunset_utc_offset = -4
 let g:fzf_layout = {'down': '75%'}
 
 let g:rustfmt_autosave = 1
-let g:rustfmt_fail_silently
 " }}}
 
-highlight ALEError ctermbg=none cterm=underline " allow underlining in terminal
-highlight ALEWarning ctermbg=none cterm=underline " allow underlining in terminal
 
 " Functions {{{
 
