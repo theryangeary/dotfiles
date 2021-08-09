@@ -1,7 +1,7 @@
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="agnoster"
 HYPHEN_INSENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 ENABLE_CORRECTION="true"
@@ -10,12 +10,16 @@ plugins=(
   git
   docker
   pass
+  poetry
 )
 
 [[ -r "$HOME/.zsh/z.sh" ]] && source $HOME/.zsh/z.sh
 source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source $ZSH/oh-my-zsh.sh
+
+NEWLINE=$'\n'
+PROMPT="$PROMPT${NEWLINE}> "
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -41,6 +45,11 @@ alias u="sudo pacman -Syu && yay -Syu"
 
 alias bc="bc -lq"
 alias cat=bat
+alias dc="sudo docker-compose"
+alias dct="sudo docker-compose -f docker-compose-test.yml"
+alias docker="sudo docker"
+alias d="docker"
+alias docker-compose="sudo docker-compose"
 alias e="search"
 alias k="killall"
 alias psag="ps aux | grep"
@@ -122,8 +131,12 @@ function bt-wh() {
 }
 alias sony="bt-wh"
 
-function bak() {
-  cp $1 $1.bak
+function bk() {
+  cp $1 $1.bk
+}
+
+function ubk() {
+  cp $1.bk $1
 }
 
 cdpath=( ~/repos ~/school/2019fall ~/ctf )

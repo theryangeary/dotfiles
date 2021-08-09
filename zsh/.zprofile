@@ -11,7 +11,7 @@
 export SCREENSHOT_PREFIX="/tmp/screenshot-"
 
 export MOZ_USE_XINPUT2=1
-export MOZ_ENABLE_WAYLAND=1
+#export MOZ_ENABLE_WAYLAND=1
 export MOZ_DBUS_REMOTE=1
 
 export BEMENU_OPTS="-l 20 -p '' -n -i --fn 'Source Code Pro 12'"
@@ -20,9 +20,9 @@ export BAT_THEME="Solarized (light)"
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
 #export XDG_RUNTIME_DIR="/tmp"
-export XDG_RUNTIME_DIR="/tmp/xdg_runtime_dir"
-mkdir -p $XDG_RUNTIME_DIR
-chmod 700 $XDG_RUNTIME_DIR
+#export XDG_RUNTIME_DIR="/tmp/xdg_runtime_dir"
+#mkdir -p $XDG_RUNTIME_DIR
+#chmod 700 $XDG_RUNTIME_DIR
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
@@ -47,6 +47,11 @@ if [ -d "$HOME/.cargo/bin" ] ; then
   export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+# set PATH so it includes gem if it exists
+if [ -d "$HOME/.gem/ruby/2.5.0/bin" ] ; then
+  export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
+fi
+
 # set PATH so it includes gem if it exists for vimgolf
 if [ -d "$HOME/.gem/ruby/2.7.0/bin" ] ; then
   export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
@@ -57,7 +62,18 @@ if [ -d "$HOME/repos/flamegraph" ] ; then
   export PATH="$HOME/repos/flamegraph:$PATH"
 fi
 
+if [ -d "$HOME/.poetry/bin" ] ; then
+  export PATH="$HOME/.poetry/bin:$PATH"
+fi
+
 dbus-update-activation-environment DISPLAY XAUTHORITY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   sway
 fi
+
+eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+export JDK_HOME=$HOME/jdk-14.0.2+12
+export PATH=$HOME/jdk-14.0.2+12/bin:$PATH
+export PATH=/usr/local/Qt-5/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/Qt-5/lib:$LD_LIBRARY_PATH

@@ -50,6 +50,11 @@ set mouse=a
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 
+if executable("rg")
+  set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
+  set grepformat=%f:%l:%c:%m
+endif
+
 " }}}
 
 " autocommands {{{
@@ -68,7 +73,7 @@ augroup vimrc
 
   autocmd VimEnter * :call airline#add_statusline_func('WindowNumber')
   autocmd VimEnter * :call airline#add_inactive_statusline_func('WindowNumber')
-  autocmd VimEnter * colorscheme gruvbox
+  autocmd VimEnter * colorscheme gruvbox | set termguicolors
   autocmd VimEnter * AirlineTheme gruvbox
 augroup END
 
@@ -157,6 +162,8 @@ nnoremap <leader>gs :Gstatus<cr>| " Open fugitive git status buffer
 nnoremap <leader>mc :make clean<cr><cr>|
 nnoremap <leader>md :make<cr>| " make (default)
 nnoremap <leader>mm :make |
+nnoremap <leader>mr :make run<cr>| " build and run
+nnoremap <leader>mt :make test<cr>| " build and run tests
 nnoremap <leader>sop :source %<cr>| " source current file
 
 " NERDTree
@@ -166,6 +173,12 @@ nnoremap <leader>nt :NERDTreeToggle<cr>| " NERDTreeToggle
 nnoremap <leader>sn nzt|
 nnoremap <leader>sp Nzt|
 nnoremap <leader>ss /">\$<cr>zt| " Select slide marker
+
+" Quickfix
+nnoremap <leader>cn :cnext<cr>
+nnoremap <leader>cp :cprev<cr>
+nnoremap <leader>cc :cclose<cr>
+nnoremap <leader>co :copen<cr>
 
 " Refactoring
 nmap <leader>rn <Plug>(coc-rename)
@@ -253,7 +266,6 @@ Plugin 'https://github.com/vim-airline/vim-airline'
 Plugin 'https://github.com/vim-airline/vim-airline-themes'
 Plugin 'https://github.com/VundleVim/Vundle.vim'
 Plugin 'https://github.com/wellle/targets.vim'
-"Plugin 'https://github.com/theryangeary/sunset'
 Plugin 'https://github.com/morhetz/gruvbox'
 
 call vundle#end()
@@ -262,7 +274,6 @@ call vundle#end()
 
 " Post-Vundle stuff {{{
 " Config that has to come after Vundle
-set termguicolors
 
 " unicode symbols
 if !exists('g:airline_symbols')
@@ -337,6 +348,13 @@ function! RipgrepFzf(query, fullscreen)
 endfunction
 command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
+" }}}
+
+" GVIM {{{
+if has("gui_running")
+  " Maximize window on gvim start
+  set lines=999 columns=999
+endif
 " }}}
 
 " vim: set fdm=marker:

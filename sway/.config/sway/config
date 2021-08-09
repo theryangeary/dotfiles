@@ -280,6 +280,7 @@ bindsym XF86MonBrightnessDown exec light -U 2 # decrease screen brightness
 for_window [title="Calculator"] floating enable
 for_window [title="Slack.*"] floating enable
 for_window [class="zoom"] floating enable
+for_window [class="CANdevStudio"] floating enable
 
 default_border pixel
 
