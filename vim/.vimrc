@@ -125,6 +125,66 @@ imap <S-Tab> <Plug>(completion_smart_s_tab)
 
 " }}}
 
+" Vundle {{{
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.fzf
+call vundle#begin()
+
+Plugin 'https://github.com/neovim/nvim-lspconfig'
+Plugin 'https://github.com/nvim-lua/lsp_extensions.nvim'
+Plugin 'https://github.com/nvim-lua/completion-nvim'
+Plugin 'https://github.com/folke/lsp-colors.nvim'
+Plugin 'https://github.com/bronson/vim-trailing-whitespace'
+Plugin 'https://github.com/junegunn/fzf.vim'
+Plugin 'https://github.com/rust-lang/rust.vim'
+Plugin 'https://github.com/scrooloose/nerdcommenter'
+Plugin 'https://github.com/scrooloose/nerdtree'
+Plugin 'https://github.com/sickill/vim-pasta'
+Plugin 'https://github.com/tpope/vim-abolish'
+Plugin 'https://github.com/tpope/vim-fugitive'
+Plugin 'https://github.com/tpope/vim-rhubarb'
+Plugin 'https://github.com/tpope/vim-surround'
+Plugin 'https://github.com/tpope/vim-unimpaired'
+Plugin 'https://github.com/vim-airline/vim-airline'
+Plugin 'https://github.com/vim-airline/vim-airline-themes'
+Plugin 'https://github.com/VundleVim/Vundle.vim'
+Plugin 'https://github.com/wellle/targets.vim'
+Plugin 'https://github.com/morhetz/gruvbox'
+
+call vundle#end()
+
+" }}}
+
+" Post-Vundle stuff {{{
+" Config that has to come after Vundle
+
+" unicode symbols
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.branch = ''
+
+syntax enable " enable syntax processing
+filetype plugin indent on " load filetype-specific indent files
+
+" Nerdtree config
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
+" vim-markdown-preview config
+let vim_markdown_preview_github=1
+
+let g:sunset_latitude = 40.712776
+let g:sunset_longitude = -74.005974
+let g:sunset_utc_offset = -4
+
+let g:fzf_layout = {'down': '75%'}
+
+let g:rustfmt_autosave = 1
+" }}}
+
 " leader mappings {{{
 let g:leader_location = expand("<sfile>:p")
 
@@ -239,66 +299,6 @@ nnoremap <leader>wC9 :9close<cr>| " Close window 9 without focusing it
 nnoremap <leader>wC0 :10close<cr>| " Close window 10 without focusing it
 
 " leader-end }}}
-
-" Vundle {{{
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=~/.fzf
-call vundle#begin()
-
-Plugin 'https://github.com/neovim/nvim-lspconfig'
-Plugin 'https://github.com/nvim-lua/lsp_extensions.nvim'
-Plugin 'https://github.com/nvim-lua/completion-nvim'
-Plugin 'https://github.com/folke/lsp-colors.nvim'
-Plugin 'https://github.com/bronson/vim-trailing-whitespace'
-Plugin 'https://github.com/junegunn/fzf.vim'
-Plugin 'https://github.com/rust-lang/rust.vim'
-Plugin 'https://github.com/scrooloose/nerdcommenter'
-Plugin 'https://github.com/scrooloose/nerdtree'
-Plugin 'https://github.com/sickill/vim-pasta'
-Plugin 'https://github.com/tpope/vim-abolish'
-Plugin 'https://github.com/tpope/vim-fugitive'
-Plugin 'https://github.com/tpope/vim-rhubarb'
-Plugin 'https://github.com/tpope/vim-surround'
-Plugin 'https://github.com/tpope/vim-unimpaired'
-Plugin 'https://github.com/vim-airline/vim-airline'
-Plugin 'https://github.com/vim-airline/vim-airline-themes'
-Plugin 'https://github.com/VundleVim/Vundle.vim'
-Plugin 'https://github.com/wellle/targets.vim'
-Plugin 'https://github.com/morhetz/gruvbox'
-
-call vundle#end()
-
-" }}}
-
-" Post-Vundle stuff {{{
-" Config that has to come after Vundle
-
-" unicode symbols
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.branch = ''
-
-syntax enable " enable syntax processing
-filetype plugin indent on " load filetype-specific indent files
-
-" Nerdtree config
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-
-" vim-markdown-preview config
-let vim_markdown_preview_github=1
-
-let g:sunset_latitude = 40.712776
-let g:sunset_longitude = -74.005974
-let g:sunset_utc_offset = -4
-
-let g:fzf_layout = {'down': '75%'}
-
-let g:rustfmt_autosave = 1
-" }}}
 
 
 " Functions {{{
