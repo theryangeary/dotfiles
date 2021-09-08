@@ -28,6 +28,9 @@ nvim_lsp.rust_analyzer.setup({
   }
 })
 
+nvim_lsp.pyright.setup{on_attach=on_attach}
+nvim_lsp.tsserver.setup{on_attach=on_attach}
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = true,
@@ -49,6 +52,7 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> <f2>  <cmd>lua vim.lsp.buf.rename()<CR>
 
 set updatetime=300
 

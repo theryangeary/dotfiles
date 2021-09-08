@@ -65,6 +65,8 @@ augroup vimrc
   autocmd!
   autocmd InsertLeave * :FixWhitespace " Always strip trailing whitespace
 
+  autocmd BufWritePre *.py execute ':Black'
+
   "autocmd BufWritePost ~/.vimrc :source ~/.vimrc
 
   autocmd FocusLost * :wa
@@ -132,6 +134,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.fzf
 call vundle#begin()
 
+Plugin 'psf/black'
 Plugin 'https://github.com/neovim/nvim-lspconfig'
 Plugin 'https://github.com/nvim-lua/lsp_extensions.nvim'
 Plugin 'https://github.com/nvim-lua/completion-nvim'
@@ -183,6 +186,10 @@ let g:sunset_utc_offset = -4
 let g:fzf_layout = {'down': '75%'}
 
 let g:rustfmt_autosave = 1
+
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+let g:completion_matching_smart_case = 1
+
 " }}}
 
 " leader mappings {{{
@@ -219,6 +226,7 @@ nnoremap <leader>gp :Gpush<cr>| " Push project to remote
 nnoremap <leader>gs :Gstatus<cr>| " Open fugitive git status buffer
 
 " Make
+nnoremap <leader>mb :make build<cr>
 nnoremap <leader>mc :make clean<cr><cr>|
 nnoremap <leader>md :make<cr>| " make (default)
 nnoremap <leader>mm :make |
