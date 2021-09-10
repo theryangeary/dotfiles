@@ -94,6 +94,7 @@ augroup filetypecmds
   autocmd!
   autocmd FileType markdown :nnoremap <cr> :execute "!pandoc -F pandoc-crossref % -o /tmp/out.pdf && xdg-open /tmp/out.pdf"<cr>
   "autocmd FileType rust :nnoremap <cr> :!RUST_BACKTRACE=1 cargo run<cr>
+  autocmd FileType rust setlocal makeprg=cargo
   autocmd FileType rust :nnoremap <cr> :!cargo test<cr>
   autocmd FileType rust :nnoremap <F2> :!cargo run<cr>
   autocmd FileType rust :nnoremap <F3> :!RUST_BACKTRACE=1 cargo run<cr>
@@ -162,6 +163,7 @@ call vundle#end()
 
 " Post-Vundle stuff {{{
 " Config that has to come after Vundle
+set termguicolors
 
 " unicode symbols
 if !exists('g:airline_symbols')
@@ -307,7 +309,6 @@ nnoremap <leader>wC9 :9close<cr>| " Close window 9 without focusing it
 nnoremap <leader>wC0 :10close<cr>| " Close window 10 without focusing it
 
 " leader-end }}}
-
 
 " Functions {{{
 
