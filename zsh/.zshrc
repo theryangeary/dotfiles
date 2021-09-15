@@ -10,7 +10,6 @@ plugins=(
   git
   docker
   pass
-  poetry
 )
 
 [[ -r "$HOME/.zsh/z.sh" ]] && source $HOME/.zsh/z.sh
