@@ -71,7 +71,9 @@ if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   sway
 fi
 
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if [ -d "$HOME/../linuxbrew" ] ; then
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
 
 export JDK_HOME=$HOME/jdk-14.0.2+12
 export PATH=$HOME/jdk-14.0.2+12/bin:$PATH
