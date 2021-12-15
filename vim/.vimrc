@@ -65,6 +65,7 @@ augroup vimrc
   autocmd!
   autocmd InsertLeave * :FixWhitespace " Always strip trailing whitespace
 
+  autocmd BufWritePre *.py execute ':Isort'
   autocmd BufWritePre *.py execute ':Black'
 
   "autocmd BufWritePost ~/.vimrc :source ~/.vimrc
@@ -135,6 +136,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.fzf
 call vundle#begin()
 
+Plugin 'fisadev/vim-isort'
 Plugin 'psf/black'
 Plugin 'https://github.com/neovim/nvim-lspconfig'
 Plugin 'https://github.com/nvim-lua/lsp_extensions.nvim'
