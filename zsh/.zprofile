@@ -52,6 +52,11 @@ if [ -d "$HOME/.gem/ruby/2.5.0/bin" ] ; then
   export PATH="$HOME/.gem/ruby/2.5.0/bin:$PATH"
 fi
 
+# set PATH so it includes gem if it exists
+if [ -d "$HOME/.gem/ruby/2.6.0/bin" ] ; then
+  export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+fi
+
 # set PATH so it includes gem if it exists for vimgolf
 if [ -d "$HOME/.gem/ruby/2.7.0/bin" ] ; then
   export PATH="$HOME/.gem/ruby/2.7.0/bin:$PATH"
@@ -66,7 +71,7 @@ if [ -d "$HOME/.poetry/bin" ] ; then
   export PATH="$HOME/.poetry/bin:$PATH"
 fi
 
-dbus-update-activation-environment DISPLAY XAUTHORITY
+#dbus-update-activation-environment DISPLAY XAUTHORITY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   sway
 fi
@@ -75,7 +80,12 @@ if [ -d "$HOME/../linuxbrew" ] ; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
+if [ -f "/opt/homebrew/bin/brew" ] ; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 export JDK_HOME=$HOME/jdk-14.0.2+12
 export PATH=$HOME/jdk-14.0.2+12/bin:$PATH
 export PATH=/usr/local/Qt-5/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/Qt-5/lib:$LD_LIBRARY_PATH
+eval "$(pyenv init --path)"

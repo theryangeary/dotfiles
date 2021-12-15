@@ -52,7 +52,6 @@ alias docker-compose="sudo docker-compose"
 alias e="search"
 alias k="killall"
 alias psag="ps aux | grep"
-alias python="$(which python3)"
 alias reset_audio="systemctl status | grep \"/usr/bin/pulseaudio\" | grep -o \"[[:digit:]]\\+\" | head -1 | xargs kill -9"
 alias sshap="ssh -p 58354 ryan@antoninus-pius.duckdns.org"
 alias sw="telnet towel.blinkenlights.nl"
@@ -143,6 +142,9 @@ cdpath=( ~/repos ~/school/2019fall ~/ctf )
 function search() {
   vim +$(rg --line-number '.' | sed -e 's/:/ /; s/:/ /' | awk '{if ($2>20) { $2 = $2 " " $2-20} else { $2 = $2 " " 0}; print $0}' | fzf --height=100% --preview "bat -r {3}: --highlight-line {2} --style=numbers,changes --color always {1}" | awk '{print $2 " " $1}')
 }
+
+eval "$(pyenv init -)"
+export PATH="/opt/homebrew/opt/gnupg@2.2/bin:$PATH"
 
 if [ -z "$TMUX" ]; then
   exec tmux
