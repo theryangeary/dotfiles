@@ -19,11 +19,6 @@ export BAT_THEME="Solarized (light)"
 
 export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
 
-#export XDG_RUNTIME_DIR="/tmp"
-#export XDG_RUNTIME_DIR="/tmp/xdg_runtime_dir"
-#mkdir -p $XDG_RUNTIME_DIR
-#chmod 700 $XDG_RUNTIME_DIR
-
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
   # include .bashrc if it exists
@@ -71,7 +66,6 @@ if [ -d "$HOME/.poetry/bin" ] ; then
   export PATH="$HOME/.poetry/bin:$PATH"
 fi
 
-#dbus-update-activation-environment DISPLAY XAUTHORITY
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   sway
 fi
@@ -88,4 +82,3 @@ export JDK_HOME=$HOME/jdk-14.0.2+12
 export PATH=$HOME/jdk-14.0.2+12/bin:$PATH
 export PATH=/usr/local/Qt-5/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/Qt-5/lib:$LD_LIBRARY_PATH
-eval "$(pyenv init --path)"

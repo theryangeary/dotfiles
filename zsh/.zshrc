@@ -32,7 +32,10 @@ export EDITOR="nvim"
 export FZF_DEFAULT_OPTS='--height 75% --layout=reverse --border'
 export LESS="-F -X $LESS"
 
-open () {xdg-open $* &}
+if [ $(uname) != "Darwin" ];
+  then
+    open () {xdg-open $* &}
+fi
 alias o="open"
 
 # pacman
@@ -143,8 +146,9 @@ function search() {
   vim +$(rg --line-number '.' | sed -e 's/:/ /; s/:/ /' | awk '{if ($2>20) { $2 = $2 " " $2-20} else { $2 = $2 " " 0}; print $0}' | fzf --height=100% --preview "bat -r {3}: --highlight-line {2} --style=numbers,changes --color always {1}" | awk '{print $2 " " $1}')
 }
 
-eval "$(pyenv init -)"
 export PATH="/opt/homebrew/opt/gnupg@2.2/bin:$PATH"
+
+fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 if [ -z "$TMUX" ]; then
   exec tmux
