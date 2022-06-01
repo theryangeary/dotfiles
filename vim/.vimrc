@@ -33,7 +33,7 @@ set hlsearch
 
 set expandtab
 set smarttab
-set shiftwidth=2
+set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 
@@ -47,7 +47,7 @@ set splitright
 set background=dark
 set mouse=a
 
-set completeopt=menuone,noinsert,noselect
+set completeopt=menu,menuone,noselect
 set shortmess+=c
 
 if executable("rg")
@@ -65,12 +65,12 @@ augroup vimrc
   autocmd!
   autocmd InsertLeave * :FixWhitespace " Always strip trailing whitespace
 
-  autocmd BufWritePre *.py execute ':Isort'
-  autocmd BufWritePre *.py execute ':Black'
-
-  "autocmd BufWritePost ~/.vimrc :source ~/.vimrc
+  "autocmd BufWritePre *.py execute ':Isort'
+  "autocmd BufWritePre *.py execute ':Black'
+  autocmd BufWritePre *.go execute ':GoFmt'
 
   autocmd FocusLost * :wa
+  autocmd WinLeave * :wa
 
   autocmd VimResized * exe "normal! \<c-w>="
 
@@ -108,24 +108,25 @@ augroup filetypecmds
   autocmd FileType hsq :nnoremap <cr> :!hsq %<cr>
   autocmd FileType html :nnoremap <cr> :!xdg-open %<cr>
   autocmd FileType java :nnoremap <cr> :!./gradlew installDist<cr>
+  autocmd FileType go :nnoremap <cr> :GoTestFunc<cr>
 augroup END
+
+augroup DragQuickfixWindowDown
+    autocmd!
+    autocmd FileType qf wincmd J
+augroup end
 
 " }}}
 
 " basic mappings {{{
 
 " escape is too far
-inoremap jk <Esc>:w<cr>
-inoremap kj <Esc>:w<cr>
-inoremap <Esc> <Esc>:w<cr>
+inoremap jk <Esc>
+inoremap kj <Esc>
 
 " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" use <Tab> as trigger keys
-imap <Tab> <Plug>(completion_smart_tab)
-imap <S-Tab> <Plug>(completion_smart_s_tab)
+"inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " }}}
 
@@ -136,13 +137,24 @@ set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.fzf
 call vundle#begin()
 
+
+Plugin 'hrsh7th/cmp-nvim-lsp'
+Plugin 'hrsh7th/cmp-buffer'
+Plugin 'hrsh7th/cmp-path'
+Plugin 'hrsh7th/cmp-cmdline'
+Plugin 'hrsh7th/nvim-cmp'
+Plugin 'hrsh7th/cmp-vsnip'
+Plugin 'hrsh7th/vim-vsnip'
+Plugin 'golang/vscode-go'
+
+Plugin 'fatih/vim-go'
 Plugin 'fisadev/vim-isort'
 Plugin 'psf/black'
 Plugin 'https://github.com/neovim/nvim-lspconfig'
 Plugin 'https://github.com/nvim-lua/lsp_extensions.nvim'
-Plugin 'https://github.com/nvim-lua/completion-nvim'
 Plugin 'https://github.com/folke/lsp-colors.nvim'
 Plugin 'https://github.com/bronson/vim-trailing-whitespace'
+Plugin 'https://github.com/junegunn/fzf'
 Plugin 'https://github.com/junegunn/fzf.vim'
 Plugin 'https://github.com/rust-lang/rust.vim'
 Plugin 'https://github.com/scrooloose/nerdcommenter'
@@ -194,6 +206,16 @@ let g:rustfmt_autosave = 1
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 let g:completion_matching_smart_case = 1
 
+let g:deoplete#enable_as_startup = 1
+
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+
 " }}}
 
 " leader mappings {{{
@@ -223,11 +245,16 @@ nnoremap <leader>fdm :set foldmethod=|
 nnoremap <leader>fdms :set foldmethod=syntax<cr>|
 
 " Git (fugitive, rhubarb)
-nnoremap <leader>gb :Gbrowse<cr>| " Open current github project in browser
+nnoremap <leader>gb V:GBrowse<cr>| " Open current github project in browser
 nnoremap <leader>gd :Gdiff<cr>| " Diff current file
 nnoremap <leader>gf :Gpull<cr>| " Open fugitive git status buffer
-nnoremap <leader>gp :Gpush<cr>| " Push project to remote
-nnoremap <leader>gs :Gstatus<cr>| " Open fugitive git status buffer
+nnoremap <leader>gp :Git push<cr>| " Push project to remote
+nnoremap <leader>gs :Git<cr>| " Open fugitive git status buffer
+
+" Go
+nnoremap <leader>gotf :GoTestFunc<cr>
+nnoremap <leader>goa :GoAlternate<cr>
+nnoremap <leader>gor :GoReferrers<cr>
 
 " Make
 nnoremap <leader>mb :make build<cr>

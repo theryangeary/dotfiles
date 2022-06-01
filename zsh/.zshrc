@@ -105,6 +105,10 @@ function gco() {
   fi
 }
 
+function gcll() {
+  git clone git@github.com:lyft/$1
+}
+
 function gpp() {
   $(git push |& grep git)
 }
@@ -131,6 +135,7 @@ function bt-wh() {
   bluetoothctl --timeout 5 -- connect 38:18:4C:BD:A0:65
 }
 alias sony="bt-wh"
+alias empid="echo 023968"
 
 function bk() {
   cp $1 $1.bk
@@ -140,7 +145,171 @@ function ubk() {
   cp $1.bk $1
 }
 
-cdpath=( ~/repos ~/school/2019fall ~/ctf )
+export description_file=~/.description.md
+export service_name=matching
+
+function _dynamex-create() {
+  desc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.stdin.read()))" < $description_file)
+  emulate -LR zsh
+  var=$1
+  var_type=$2
+  default_value=$3
+  builtin cd ~/src/marketplaceconfig/data/$service_name
+  git checkout master
+  git reset --hard origin/master
+  git clean -fd
+  git pull
+  branch="create-$var"
+  git branch -D $branch
+  git checkout -b $branch
+  dynamex marketplaceconfig $service_name <<< "create $var $var_type $default_value"
+  git add $var
+  git commit -m "create $var"
+  git push --set-upstream origin $branch
+  open "https://github.com/lyft/marketplaceconfig/compare/$branch?quick_pull=1&body=${desc}"
+  git checkout master
+  builtin cd -
+}
+
+function _dynamex-update() {
+  desc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.stdin.read()))" < $description_file)
+  emulate -LR zsh
+  var=$1
+  env=$2
+  value=$3
+  region=$4
+  builtin cd ~/src/marketplaceconfig/data/$service_name
+  git checkout master
+  git reset --hard origin/master
+  git clean -fd
+  git pull
+  branch=$(branch_name $var $env $value $region)
+  echo $branch
+  git branch -D $branch
+  git checkout -b $branch
+  if [[ -z $region ]]
+  then
+    dynamex marketplaceconfig $service_name <<< "update $var $env $value"
+  else
+    dynamex marketplaceconfig $service_name <<< "update $var $env $value --region $region"
+  fi
+  git diff
+  git add $var
+  if [[ -z $region ]]
+  then
+    git commit -m "$env $value $var"
+  else
+    git commit -m "$region $value $var"
+  fi
+  git push --set-upstream origin $branch
+  open "https://github.com/lyft/marketplaceconfig/compare/$branch?quick_pull=1&body=${desc}"
+  git checkout master
+  builtin cd -
+}
+
+function _launch-experiment() {
+  echo "WARNING THIS IS UNTESTED"
+  desc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.stdin.read()))" < $description_file)
+  emulate -LR zsh
+  experiment_file_path=$1
+  experiment_file_name=$(basename $experiment_file)
+  cp $experiment_file_path ~/src/marketplaceconfig/data/$service_name
+  pushd ~/src/marketplaceconfig/data/$service_name
+  git checkout master
+  git reset --hard origin/master
+  git clean -fd
+  git pull
+  branch="launch-$(basename $experiment_file .json)"
+  echo $branch
+  git branch -D $branch
+  git checkout -b $branch
+  dynamex marketplaceconfig $service_name <<< "launch_experiment $experiment_file_name"
+  git diff
+  builtin cd ..
+  git add data
+  git commit -m "launch $experiment_name $(date -r $(experiment_start_time))"
+  git push --set-upstream origin $branch
+  open "https://github.com/lyft/marketplaceconfig/compare/$branch?quick_pull=1&body=${desc}"
+  git checkout master
+  popd
+}
+
+function branch_name() {
+  var=$1
+  env=$2
+  value=$3
+  region=$4
+  if [[ -z $region ]]
+  then
+      echo "set-$var-$env-$value"
+  else
+      echo "set-$var-$region-$value"
+  fi
+}
+
+function dynamex_create() {
+    vim $description_file
+    var=$1
+    var_type=$2
+    value=$3
+    _dynamex-create $var $var_type $value
+}
+
+function dynamex_update() {
+    vim $description_file
+    var=$1
+    env=$2
+    value=$3
+    region=$4
+    _dynamex-update $var $env $value $region
+}
+
+function rollout() {
+  vim $description_file
+  var=$1
+  env=$2
+  values=$3
+  region=$4
+  for value in $(echo ${values//,/ })
+  do
+    _dynamex-update $var $env $value $region
+  done
+}
+
+function rollout_update() {
+  emulate -LR zsh
+  var=$1
+  env=$2
+  value=$3
+  region=$4
+  builtin cd ~/src/marketplaceconfig/data/$service_name
+  git checkout master
+  git reset --hard origin/master
+  git clean -fd
+  git pull
+  branch=$(branch_name $var $env $value $region)
+  git checkout $branch
+  git rebase -Xtheirs origin/master
+  git push --force-with-lease
+  git checkout master
+  builtin cd -
+}
+
+function launch_experiment() {
+  experiment_file_path=$1
+  cp $experiment_file_path $description_file
+  _launch-experiment $experiment_file_path
+}
+
+function pr() {
+  vim $description_file
+  desc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.stdin.read()))" < $description_file)
+  gpp
+  gh pr create --web --assignee @me --body-file ${description_file}
+  #open "https://github.com/lyft/$(basename $(git rev-parse --show-toplevel))/compare/$(git branch --show-current)?quick_pull=1&body=${desc}"
+}
+
+cdpath=( ~/src ~/repos ~/school/2019fall ~/ctf )
 
 function search() {
   vim +$(rg --line-number '.' | sed -e 's/:/ /; s/:/ /' | awk '{if ($2>20) { $2 = $2 " " $2-20} else { $2 = $2 " " 0}; print $0}' | fzf --height=100% --preview "bat -r {3}: --highlight-line {2} --style=numbers,changes --color always {1}" | awk '{print $2 " " $1}')
@@ -153,3 +322,10 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 if [ -z "$TMUX" ]; then
   exec tmux
 fi
+
+# Add support for Go modules and Lyft's Athens module proxy/store
+# These variables were added by 'hacktools/go.sh'
+export GOPROXY='https://athens.ingress.infra.us-east-1.k8s.lyft.net'
+export GONOSUMDB='github.com/lyft/*,github.lyft.net/*'
+PATH=$PATH:/Users/rgeary/.lyftkube-bin
+LYFT_CODE_ROOT=~/src

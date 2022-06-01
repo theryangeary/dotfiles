@@ -66,8 +66,8 @@ if [ -d "$HOME/.poetry/bin" ] ; then
   export PATH="$HOME/.poetry/bin:$PATH"
 fi
 
-if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-  sway
+if [ -d "$HOME/go/bin" ] ; then
+  export PATH="$HOME/go/bin:$PATH"
 fi
 
 if [ -d "$HOME/../linuxbrew" ] ; then
@@ -78,7 +78,8 @@ if [ -f "/opt/homebrew/bin/brew" ] ; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-export JDK_HOME=$HOME/jdk-14.0.2+12
-export PATH=$HOME/jdk-14.0.2+12/bin:$PATH
-export PATH=/usr/local/Qt-5/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/Qt-5/lib:$LD_LIBRARY_PATH
+if [ -f "/opt/lyft/brew/bin/aactivator" ] ; then
+  eval "$(/opt/lyft/brew/bin/aactivator init)"
+fi
+
+export LYFT_CODE_ROOT=~/src
