@@ -8,6 +8,9 @@ $(targets):
 vim:
 	stow vim
 	vim -c 'VundleInstall' -c 'qa'
+	pip3 install neovim
+	gem install --user neovim
+	npm install neovim
 
 tmux:
 	stow tmux
