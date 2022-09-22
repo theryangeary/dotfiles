@@ -1,0 +1,4 @@
+#!/bin/bash
+echo $1
+
+find ~/src/marketplaceconfig/data -path "*$1*" -type f -exec bat {} \;

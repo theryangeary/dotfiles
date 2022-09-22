@@ -83,3 +83,19 @@ if [ -f "/opt/lyft/brew/bin/aactivator" ] ; then
 fi
 
 export LYFT_CODE_ROOT=~/src
+source '/Users/rgeary/src/awsaccess/awsaccess2.sh' # awsaccess
+source '/Users/rgeary/src/awsaccess/oktaawsaccess.sh' # oktaawsaccess
+
+##
+# Your previous /Users/rgeary/.zprofile file was backed up as /Users/rgeary/.zprofile.macports-saved_2022-07-08_at_09:37:01
+##
+
+# MacPorts Installer addition on 2022-07-08_at_09:37:01: adding an appropriate PATH variable for use with MacPorts.
+export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+# Finished adapting your PATH environment variable for use with MacPorts.
+
+
+# MacPorts Installer addition on 2022-07-08_at_09:37:01: adding an appropriate MANPATH variable for use with MacPorts.
+export MANPATH="/opt/local/share/man:$MANPATH"
+# Finished adapting your MANPATH environment variable for use with MacPorts.
+

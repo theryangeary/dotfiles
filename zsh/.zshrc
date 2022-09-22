@@ -110,7 +110,7 @@ function gcll() {
 }
 
 function gpp() {
-  $(git push |& grep git)
+  $(git push |& grep "git push")
 }
 
 function z() {
@@ -329,3 +329,8 @@ export GOPROXY='https://athens.ingress.infra.us-east-1.k8s.lyft.net'
 export GONOSUMDB='github.com/lyft/*,github.lyft.net/*'
 PATH=$PATH:/Users/rgeary/.lyftkube-bin
 LYFT_CODE_ROOT=~/src
+export PATH="/opt/homebrew/opt/go@1.17/bin:$PATH"
+source '/Users/rgeary/src/awsaccess/awsaccess2.sh' # awsaccess
+source '/Users/rgeary/src/awsaccess/oktaawsaccess.sh' # oktaawsaccess
+export PS1="\$(ps1_mfa_context)$PS1" # awsaccess
+eval "$(aactivator init)"

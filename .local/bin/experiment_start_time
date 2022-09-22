@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+import datetime
+import time
+
+date = datetime.datetime.today() + datetime.timedelta(days=1)
+time = datetime.time(12, 0, 0)
+datetime = datetime.datetime.combine(date, time)
+print(int(datetime.timestamp()))
