@@ -146,14 +146,14 @@ function ubk() {
 }
 
 export description_file=~/.description.md
-export service_name=matching
 
 function _dynamex-create() {
   desc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.stdin.read()))" < $description_file)
   emulate -LR zsh
-  var=$1
-  var_type=$2
-  default_value=$3
+  service_name=$1
+  var=$2
+  var_type=$3
+  default_value=$4
   builtin cd ~/src/marketplaceconfig/data/$service_name
   git checkout master
   git reset --hard origin/master
@@ -174,10 +174,11 @@ function _dynamex-create() {
 function _dynamex-update() {
   desc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.stdin.read()))" < $description_file)
   emulate -LR zsh
-  var=$1
-  env=$2
-  value=$3
-  region=$4
+  service_name=$1
+  var=$2
+  env=$3
+  value=$4
+  region=$5
   builtin cd ~/src/marketplaceconfig/data/$service_name
   git checkout master
   git reset --hard origin/master
@@ -249,39 +250,43 @@ function branch_name() {
 
 function dynamex_create() {
     vim $description_file
-    var=$1
-    var_type=$2
-    value=$3
-    _dynamex-create $var $var_type $value
+    service_name=$1
+    var=$2
+    var_type=$3
+    value=$4
+    _dynamex-create $service_name $var $var_type $value
 }
 
 function dynamex_update() {
     vim $description_file
-    var=$1
-    env=$2
-    value=$3
-    region=$4
-    _dynamex-update $var $env $value $region
+    service_name=$1
+    var=$2
+    env=$3
+    value=$4
+    region=$5
+    _dynamex-update $service_name $var $env $value $region
 }
 
 function rollout() {
   vim $description_file
-  var=$1
-  env=$2
-  values=$3
-  region=$4
+  service_name=$1
+  var=$2
+  env=$3
+  values=$4
+  region=$5
   for value in $(echo ${values//,/ })
   do
-    _dynamex-update $var $env $value $region
+    _dynamex-update $service_name $var $env $value $region
   done
 }
 
 function rollout_update() {
   emulate -LR zsh
-  var=$1
-  env=$2
-  value=$3
-  region=$4
+  service_name=$1
+  var=$2
+  env=$3
+  value=$4
+  region=$5
   builtin cd ~/src/marketplaceconfig/data/$service_name
   git checkout master
   git reset --hard origin/master
