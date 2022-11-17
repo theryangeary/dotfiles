@@ -208,33 +208,6 @@ function _dynamex-update() {
   builtin cd -
 }
 
-function _launch-experiment() {
-  echo "WARNING THIS IS UNTESTED"
-  desc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.stdin.read()))" < $description_file)
-  emulate -LR zsh
-  experiment_file_path=$1
-  experiment_file_name=$(basename $experiment_file)
-  cp $experiment_file_path ~/src/marketplaceconfig/data/$service_name
-  pushd ~/src/marketplaceconfig/data/$service_name
-  git checkout master
-  git reset --hard origin/master
-  git clean -fd
-  git pull
-  branch="launch-$(basename $experiment_file .json)"
-  echo $branch
-  git branch -D $branch
-  git checkout -b $branch
-  dynamex marketplaceconfig $service_name <<< "launch_experiment $experiment_file_name"
-  git diff
-  builtin cd ..
-  git add data
-  git commit -m "launch $experiment_name $(date -r $(experiment_start_time))"
-  git push --set-upstream origin $branch
-  open "https://github.com/lyft/marketplaceconfig/compare/$branch?quick_pull=1&body=${desc}"
-  git checkout master
-  popd
-}
-
 function branch_name() {
   var=$1
   env=$2
@@ -298,12 +271,6 @@ function rollout_update() {
   git push --force-with-lease
   git checkout master
   builtin cd -
-}
-
-function launch_experiment() {
-  experiment_file_path=$1
-  cp $experiment_file_path $description_file
-  _launch-experiment $experiment_file_path
 }
 
 function pr() {
