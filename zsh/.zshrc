@@ -278,7 +278,6 @@ function pr() {
   desc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.stdin.read()))" < $description_file)
   gpp
   gh pr create --web --assignee @me --body-file ${description_file}
-  #open "https://github.com/lyft/$(basename $(git rev-parse --show-toplevel))/compare/$(git branch --show-current)?quick_pull=1&body=${desc}"
 }
 
 cdpath=( ~/src ~/repos ~/school/2019fall ~/ctf )
