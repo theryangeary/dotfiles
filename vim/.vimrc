@@ -230,6 +230,10 @@ nnoremap <leader><TAB> | " Go to previous buffer
 nnoremap <silent> <leader>bd :bdelete<cr>|
 nnoremap <leader>bl :ls<cr>:buffer<space>|
 
+" Debug
+nnoremap <leader>dcp :let @+=@%<cr>|
+nnoremap <leader>dcl :let @+=@% . ':' . line('.')<cr>|
+
 " Files
 nnoremap <leader>fe :edit |
 nnoremap <leader>ff :FZF<cr>| " Find file
