@@ -78,14 +78,6 @@ if [ -f "/opt/homebrew/bin/brew" ] ; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-if [ -f "/opt/lyft/brew/bin/aactivator" ] ; then
-  eval "$(/opt/lyft/brew/bin/aactivator init)"
-fi
-
-export LYFT_CODE_ROOT=~/src
-source '/Users/rgeary/src/awsaccess/awsaccess2.sh' # awsaccess
-source '/Users/rgeary/src/awsaccess/oktaawsaccess.sh' # oktaawsaccess
-
 ##
 # Your previous /Users/rgeary/.zprofile file was backed up as /Users/rgeary/.zprofile.macports-saved_2022-07-08_at_09:37:01
 ##
