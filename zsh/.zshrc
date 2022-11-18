@@ -293,22 +293,3 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 if [ -z "$TMUX" ]; then
   exec tmux
 fi
-
-# Add support for Go modules and Lyft's Athens module proxy/store
-# These variables were added by 'hacktools/go.sh'
-export GOPROXY='https://athens.ingress.infra.us-east-1.k8s.lyft.net'
-export GONOSUMDB='github.com/lyft/*,github.lyft.net/*'
-PATH=$PATH:/Users/rgeary/.lyftkube-bin
-LYFT_CODE_ROOT=~/src
-export PATH="/opt/homebrew/opt/go@1.17/bin:$PATH"
-source '/Users/rgeary/src/awsaccess/awsaccess2.sh' # awsaccess
-source '/Users/rgeary/src/awsaccess/oktaawsaccess.sh' # oktaawsaccess
-export PS1="\$(ps1_mfa_context)$PS1" # awsaccess
-eval "$(aactivator init)"
-
-### lyft_localdevtools_shell_rc start
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
-fi
-### lyft_localdevtools_shell_rc end
