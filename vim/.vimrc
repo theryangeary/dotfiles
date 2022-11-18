@@ -55,7 +55,7 @@ if executable("rg")
   set grepformat=%f:%l:%c:%m
 endif
 
-let &titlestring ='VIM - (%f) %t'
+let &titlestring ='VIM MODE:%{mode()} (%f) %t'
 set title
 
 " }}}
