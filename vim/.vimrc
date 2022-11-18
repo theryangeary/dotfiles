@@ -55,6 +55,9 @@ if executable("rg")
   set grepformat=%f:%l:%c:%m
 endif
 
+let &titlestring ='VIM - (%f) %t'
+set title
+
 " }}}
 
 " autocommands {{{
