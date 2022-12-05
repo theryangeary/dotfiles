@@ -96,22 +96,22 @@ augroup END
 
 augroup filetypecmds
   autocmd!
-  autocmd FileType markdown :nnoremap <cr> :execute "!pandoc -F pandoc-crossref % -o /tmp/out.pdf && xdg-open /tmp/out.pdf"<cr>
+  "autocmd FileType markdown :nnoremap <cr> :execute "!pandoc -F pandoc-crossref % -o /tmp/out.pdf && open /tmp/out.pdf"<cr>
   "autocmd FileType rust :nnoremap <cr> :!RUST_BACKTRACE=1 cargo run<cr>
   "autocmd FileType rust setlocal makeprg=cargo
   "autocmd FileType rust :nnoremap <cr> :!cargo test<cr>
   "autocmd FileType rust :nnoremap <F2> :!cargo run<cr>
   "autocmd FileType rust :nnoremap <F3> :!RUST_BACKTRACE=1 cargo run<cr>
   "autocmd FileType rust :nnoremap <F4> :!RUST_BACKTRACE=full cargo run<cr>
-  autocmd FileType tex :nnoremap <cr> :execute "!pdflatex % && mupdf" expand('%:t:r') . ".pdf"<cr>
-  autocmd FileType vim :nnoremap <cr> :source %<cr>
-  autocmd FileType python :nnoremap <cr> :!python3 %<cr>
+  "autocmd FileType tex :nnoremap <cr> :execute "!pdflatex % && mupdf" expand('%:t:r') . ".pdf"<cr>
+  "autocmd FileType vim :nnoremap <cr> :source %<cr>
+  "autocmd FileType python :nnoremap <cr> :!python3 %<cr>
   autocmd FileType json syntax match Comment +\/\/.\+$+
-  autocmd FileType c,cpp :nnoremap <cr> :!gcc % && ./a.out |
-  autocmd FileType hsq :nnoremap <cr> :!hsq %<cr>
-  autocmd FileType html :nnoremap <cr> :!xdg-open %<cr>
-  autocmd FileType java :nnoremap <cr> :!./gradlew installDist<cr>
-  autocmd FileType go :nnoremap <cr> :GoTestFunc<cr>
+  "autocmd FileType c,cpp :nnoremap <cr> :!gcc % && ./a.out |
+  "autocmd FileType hsq :nnoremap <cr> :!hsq %<cr>
+  "autocmd FileType html :nnoremap <cr> :!xdg-open %<cr>
+  "autocmd FileType java :nnoremap <cr> :!./gradlew installDist<cr>
+  "autocmd FileType go :nnoremap <cr> :GoTestFunc<cr>
 augroup END
 
 augroup DragQuickfixWindowDown
