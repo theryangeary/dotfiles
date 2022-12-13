@@ -290,7 +290,7 @@ schemes:
       magenta: '#d3869b'
       cyan:    '#8ec07c'
       white:   '#ebdbb2'
-colors: *gruvbox-dark
+colors: *gruvbox-light
 
 # Visual Bell
 #

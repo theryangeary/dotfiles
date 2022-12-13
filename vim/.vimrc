@@ -79,7 +79,7 @@ augroup vimrc
 
   autocmd VimEnter * :call airline#add_statusline_func('WindowNumber')
   autocmd VimEnter * :call airline#add_inactive_statusline_func('WindowNumber')
-  autocmd VimEnter * colorscheme gruvbox | set termguicolors
+  autocmd VimEnter * colorscheme gruvbox | set termguicolors | set bg=light
   autocmd VimEnter * AirlineTheme gruvbox
 augroup END
 
