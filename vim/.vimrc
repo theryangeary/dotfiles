@@ -141,6 +141,7 @@ set rtp+=~/.fzf
 call vundle#begin()
 
 
+Plugin 'simrat39/rust-tools.nvim'
 Plugin 'romainl/vim-qf'
 Plugin 'hrsh7th/cmp-nvim-lsp'
 Plugin 'hrsh7th/cmp-buffer'
