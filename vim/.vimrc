@@ -79,8 +79,8 @@ augroup vimrc
 
   autocmd VimEnter * :call airline#add_statusline_func('WindowNumber')
   autocmd VimEnter * :call airline#add_inactive_statusline_func('WindowNumber')
-  autocmd VimEnter * colorscheme gruvbox | set termguicolors | set bg=light
-  autocmd VimEnter * AirlineTheme gruvbox
+  autocmd VimEnter * colorscheme solarized8 | set termguicolors | set bg=light
+  autocmd VimEnter * AirlineTheme solarized
 augroup END
 
 augroup cursorlinectl
@@ -175,6 +175,7 @@ Plugin 'https://github.com/vim-airline/vim-airline-themes'
 Plugin 'https://github.com/VundleVim/Vundle.vim'
 Plugin 'https://github.com/wellle/targets.vim'
 Plugin 'https://github.com/morhetz/gruvbox'
+Plugin 'https://github.com/lifepillar/vim-solarized8'
 
 call vundle#end()
 

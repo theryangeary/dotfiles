@@ -47,11 +47,8 @@ alias u="sudo pacman -Syu && yay -Syu"
 
 alias bc="bc -lq"
 alias cat=bat
-alias dc="sudo docker-compose"
-alias dct="sudo docker-compose -f docker-compose-test.yml"
-alias docker="sudo docker"
 alias d="docker"
-alias docker-compose="sudo docker-compose"
+alias dc="docker-compose"
 alias e="search"
 alias edit="$EDITOR"
 alias k="killall"
@@ -59,6 +56,9 @@ alias psag="ps aux | grep"
 alias reset_audio="systemctl status | grep \"/usr/bin/pulseaudio\" | grep -o \"[[:digit:]]\\+\" | head -1 | xargs kill -9"
 alias sshap="ssh -p 58354 ryan@antoninus-pius.duckdns.org"
 alias sw="telnet towel.blinkenlights.nl"
+alias tf="terraform"
+alias tfi="terraform init"
+alias tfp="terraform plan"
 alias weather="curl wttr.in | grep -v @igor_chubin"
 alias vim="$EDITOR"
 alias vimrc="$EDITOR ~/.vimrc"
@@ -67,6 +67,17 @@ alias tmuxrc="$EDITOR ~/.tmux.conf && tmux source-file ~/.tmux.conf"
 alias swayrc="$EDITOR ~/.config/sway/config"
 alias i3statusrc="$EDITOR ~/.config/i3status/config"
 alias grd="./gradlew"
+alias sleep="gsleep"
+
+function after() {
+    (sleep $1 && $@[2,-1])&
+}
+alias a="after"
+
+function pomodoro() {
+    after 25m say -a 73 -v Bubbles e e, e e
+}
+alias pom="pomodoro"
 
 function lsA() {
   if [ $PWD = $HOME ];
@@ -107,11 +118,20 @@ function gco() {
 }
 
 function gcll() {
-  git clone git@github.com:lyft/$1
+  builtin pushd ~/src && git clone git@github.com:lyft/$1 && builtin popd
 }
 
 function gpp() {
   $(git push |& grep "git push")
+}
+
+function gpa() {
+    gh pr review $1 --approve
+}
+
+function gdo() {
+    set -x
+    git add -u && git commit --message "$@" && git push
 }
 
 function z() {
@@ -167,7 +187,8 @@ function _dynamex-create() {
   git add $var
   git commit -m "create $var"
   git push --set-upstream origin $branch
-  open "https://github.com/lyft/marketplaceconfig/compare/$branch?quick_pull=1&body=${desc}"
+  gh pr create -F $description_file -f
+  gh pr view --web
   git checkout master
   builtin cd -
 }
@@ -193,7 +214,15 @@ function _dynamex-update() {
   then
     dynamex marketplaceconfig $service_name <<< "update $var $env $value"
   else
-    dynamex marketplaceconfig $service_name <<< "update $var $env $value --region $region"
+    echo $env
+    if [ $env = "staging" ]
+    then
+      echo "override $var $env region $value --region $region"
+      dynamex marketplaceconfig $service_name <<< "override $var $env region $value --region $region"
+    else
+      echo "update $var region $value --region $region"
+      dynamex marketplaceconfig $service_name <<< "update $var region $value --region $region"
+    fi
   fi
   git diff
   git add $var
@@ -204,7 +233,8 @@ function _dynamex-update() {
     git commit -m "$region $value $var"
   fi
   git push --set-upstream origin $branch
-  open "https://github.com/lyft/marketplaceconfig/compare/$branch?quick_pull=1&body=${desc}"
+  gh pr create -F $description_file -f
+  gh pr view --web
   git checkout master
   builtin cd -
 }
@@ -218,7 +248,7 @@ function branch_name() {
   then
       echo "set-$var-$env-$value"
   else
-      echo "set-$var-$region-$value"
+      echo "set-$var-$env-$region-$value"
   fi
 }
 
@@ -252,6 +282,10 @@ function rollout() {
   do
     _dynamex-update $service_name $var $env $value $region
   done
+  for value in $(echo ${values//,/ })
+  do
+    gh pr list --head $(branch_name $var $env $value $region) --json url | jq '.[0].url' | tr -d '"' | sed -e 's/^/gh pr review --approve /'
+  done
 }
 
 function rollout_update() {
@@ -278,7 +312,7 @@ function pr() {
   vim $description_file
   desc=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote_plus(sys.stdin.read()))" < $description_file)
   gpp
-  gh pr create --web --assignee @me --body-file ${description_file}
+  gh pr create --web --assignee @me --body-file "${description_file}"
 }
 
 cdpath=( ~/src ~/repos ~/school/2019fall ~/ctf )
@@ -290,6 +324,8 @@ function search() {
 export PATH="/opt/homebrew/opt/gnupg@2.2/bin:$PATH"
 
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+eval "$(direnv hook zsh)"
 
 if [ -z "$TMUX" ]; then
   exec tmux
