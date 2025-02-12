@@ -282,10 +282,12 @@ function rollout() {
   do
     _dynamex-update $service_name $var $env $value $region
   done
+  builtin cd ~/src/marketplaceconfig/data/$service_name
   for value in $(echo ${values//,/ })
   do
     gh pr list --head $(branch_name $var $env $value $region) --json url | jq '.[0].url' | tr -d '"' | sed -e 's/^/gh pr review --approve /'
   done
+  cd -
 }
 
 function rollout_update() {
