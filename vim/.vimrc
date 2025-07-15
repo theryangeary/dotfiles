@@ -153,7 +153,6 @@ Plugin 'hrsh7th/vim-vsnip'
 Plugin 'golang/vscode-go'
 
 Plugin 'fatih/vim-go'
-Plugin 'fisadev/vim-isort'
 Plugin 'psf/black'
 Plugin 'https://github.com/neovim/nvim-lspconfig'
 Plugin 'https://github.com/nvim-lua/lsp_extensions.nvim'
