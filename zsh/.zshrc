@@ -45,6 +45,7 @@ fi
 
 alias bc="bc -lq"
 alias cat=bat
+alias claude="/Users/ryan/.claude/local/claude"
 alias d="docker"
 alias dc="docker-compose"
 alias e="search"
@@ -173,9 +174,10 @@ function search() {
   vim +$(rg --line-number '.' | sed -e 's/:/ /; s/:/ /' | awk '{if ($2>20) { $2 = $2 " " $2-20} else { $2 = $2 " " 0}; print $0}' | fzf --height=100% --preview "bat -r {3}: --highlight-line {2} --style=numbers,changes --color always {1}" | awk '{print $2 " " $1}')
 }
 
-source ~/.zshrc_lyft
+if [ -f ~/.zshrc_lyft ]; then
+    source ~/.zshrc_lyft
+fi
 
 if [ -z "$TMUX" ]; then
     tmux attach -t $(tmux list-sessions -F "#S #{session_attached}" | grep -E "(\d+) 0" | cut -d ' ' -f 1) || exec tmux new-session && exit;
 fi
-
