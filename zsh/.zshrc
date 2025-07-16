@@ -178,6 +178,8 @@ if [ -f ~/.zshrc_lyft ]; then
     source ~/.zshrc_lyft
 fi
 
+eval "$(starship init zsh)"
+
 if [ -z "$TMUX" ]; then
     tmux attach -t $(tmux list-sessions -F "#S #{session_attached}" | grep -E "(\d+) 0" | cut -d ' ' -f 1) || exec tmux new-session && exit;
 fi
