@@ -1,2 +1,3 @@
 .nvimlog
 vim/.vim/bundle
+vim/.config/nvim/lazy-lock.json
