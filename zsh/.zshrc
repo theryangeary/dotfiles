@@ -180,6 +180,6 @@ fi
 
 eval "$(starship init zsh)"
 
-if [ -z "$TMUX" ]; then
+if [ -z "$TMUX" ] && [ $TERM_PROGRAM != "vscode" ]; then
     tmux attach -t $(tmux list-sessions -F "#S #{session_attached}" | grep -E "(\d+) 0" | cut -d ' ' -f 1) || exec tmux new-session && exit;
 fi
