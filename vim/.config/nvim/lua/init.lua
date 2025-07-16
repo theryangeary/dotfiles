@@ -119,7 +119,8 @@ require("conform").setup({
     typescript = { "prettier" },
     typescriptreact = { "prettier" },
     json = { "prettier" },
-    -- etc
+    rust = { "rustfmt" },
+    go = { "gofmt" },
   },
 })
 
