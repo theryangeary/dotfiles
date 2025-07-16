@@ -46,6 +46,8 @@ set splitright
 
 set background=dark
 set mouse=a
+set noshowmode
+set spelllang = "en_us"
 
 set completeopt=menu,menuone,noselect
 set shortmess+=c
@@ -136,47 +138,34 @@ inoremap kj <Esc>
 " Vundle {{{
 set nocompatible
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+"set rtp+=~/.vim/bundle/Vundle.vim
 set rtp+=~/.fzf
-call vundle#begin()
+"call vundle#begin()
 
 
-Plugin 'simrat39/rust-tools.nvim'
-Plugin 'romainl/vim-qf'
-Plugin 'hrsh7th/cmp-nvim-lsp'
-Plugin 'hrsh7th/cmp-buffer'
-Plugin 'hrsh7th/cmp-path'
-Plugin 'hrsh7th/cmp-cmdline'
-Plugin 'hrsh7th/nvim-cmp'
-Plugin 'hrsh7th/cmp-vsnip'
-Plugin 'hrsh7th/vim-vsnip'
-Plugin 'golang/vscode-go'
+"Plugin 'fatih/vim-go'
+"Plugin 'psf/black'
+"Plugin 'https://github.com/folke/lsp-colors.nvim'
+"Plugin 'https://github.com/bronson/vim-trailing-whitespace'
+"Plugin 'https://github.com/junegunn/fzf'
+"Plugin 'https://github.com/junegunn/fzf.vim'
+"Plugin 'https://github.com/rust-lang/rust.vim'
+"Plugin 'https://github.com/scrooloose/nerdcommenter'
+"Plugin 'https://github.com/scrooloose/nerdtree'
+"Plugin 'https://github.com/sickill/vim-pasta'
+"Plugin 'https://github.com/tpope/vim-abolish'
+"Plugin 'https://github.com/tpope/vim-fugitive'
+"Plugin 'https://github.com/tpope/vim-rhubarb'
+"Plugin 'https://github.com/tpope/vim-surround'
+"Plugin 'https://github.com/tpope/vim-unimpaired'
+"Plugin 'https://github.com/vim-airline/vim-airline'
+"Plugin 'https://github.com/vim-airline/vim-airline-themes'
+"Plugin 'https://github.com/VundleVim/Vundle.vim'
+"Plugin 'https://github.com/wellle/targets.vim'
+"Plugin 'https://github.com/morhetz/gruvbox'
+"Plugin 'https://github.com/lifepillar/vim-solarized8'
 
-Plugin 'fatih/vim-go'
-Plugin 'psf/black'
-Plugin 'https://github.com/neovim/nvim-lspconfig'
-Plugin 'https://github.com/nvim-lua/lsp_extensions.nvim'
-Plugin 'https://github.com/folke/lsp-colors.nvim'
-Plugin 'https://github.com/bronson/vim-trailing-whitespace'
-Plugin 'https://github.com/junegunn/fzf'
-Plugin 'https://github.com/junegunn/fzf.vim'
-Plugin 'https://github.com/rust-lang/rust.vim'
-Plugin 'https://github.com/scrooloose/nerdcommenter'
-Plugin 'https://github.com/scrooloose/nerdtree'
-Plugin 'https://github.com/sickill/vim-pasta'
-Plugin 'https://github.com/tpope/vim-abolish'
-Plugin 'https://github.com/tpope/vim-fugitive'
-Plugin 'https://github.com/tpope/vim-rhubarb'
-Plugin 'https://github.com/tpope/vim-surround'
-Plugin 'https://github.com/tpope/vim-unimpaired'
-Plugin 'https://github.com/vim-airline/vim-airline'
-Plugin 'https://github.com/vim-airline/vim-airline-themes'
-Plugin 'https://github.com/VundleVim/Vundle.vim'
-Plugin 'https://github.com/wellle/targets.vim'
-Plugin 'https://github.com/morhetz/gruvbox'
-Plugin 'https://github.com/lifepillar/vim-solarized8'
-
-call vundle#end()
+"call vundle#end()
 
 " }}}
 
@@ -191,7 +180,7 @@ endif
 let g:airline_symbols.branch = ''
 
 syntax enable " enable syntax processing
-filetype plugin indent on " load filetype-specific indent files
+"filetype plugin indent on " load filetype-specific indent files
 
 " Nerdtree config
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -227,7 +216,6 @@ let g:go_highlight_operators = 1
 let g:leader_location = expand("<sfile>:p")
 
 let mapleader = " "
-" leader-begin
 
 " Buffers
 nnoremap <leader><TAB> | " Go to previous buffer
@@ -277,48 +265,17 @@ nnoremap <leader>sop :source %<cr>| " source current file
 " NERDTree
 nnoremap <leader>nt :NERDTreeToggle<cr>| " NERDTreeToggle
 
-" Presenting (slides start with ">$)
-nnoremap <leader>sn nzt|
-nnoremap <leader>sp Nzt|
-nnoremap <leader>ss /">\$<cr>zt| " Select slide marker
-
 " Quickfix
 nnoremap <leader>cn :cnext<cr>
 nnoremap <leader>cp :cprev<cr>
 nnoremap <leader>cc :cclose<cr>
 nnoremap <leader>co :copen<cr>
 
-" Refactoring
-nmap <leader>rn <Plug>(coc-rename)
-
 " Spelling
 nnoremap <leader>sp 1z=
 
-" Tabs
-nnoremap <leader><leader>0 10gt
-nnoremap <leader><leader>1 1gt
-nnoremap <leader><leader>2 2gt
-nnoremap <leader><leader>3 3gt
-nnoremap <leader><leader>4 4gt
-nnoremap <leader><leader>5 5gt
-nnoremap <leader><leader>6 6gt
-nnoremap <leader><leader>7 7gt
-nnoremap <leader><leader>8 8gt
-nnoremap <leader><leader>9 9gt
-nnoremap <leader>tc :tabc<cr>| " close tab
-nnoremap <leader>te :tabe<cr>| " new tab
-
-" Tags
-nnoremap <leader>tg :!ctags -R .<cr><leader>| " Silently generate tags
-
-" Terminal
-nnoremap <leader>td :bdelete!<cr>| " delete terminal
-nnoremap <leader>tt :terminal<cr>| " new terminal
-tnoremap <leader><Esc> | " prefer this over plain <Esc> for TUI applications
-tnoremap <leader><TAB> | " change to prev buffer
-
 " Toggle
-nnoremap <leader>tolw :set wrap!<cr>
+nnoremap <leader>tow :set wrap!<cr>
 
 " Vundle
 nnoremap <leader>vap :call VundleAppendPlugin()<cr>call SortVundlePlugins()<cr>
@@ -346,8 +303,6 @@ nnoremap <leader>wC8 :8close<cr>| " Close window 8 without focusing it
 nnoremap <leader>wC9 :9close<cr>| " Close window 9 without focusing it
 nnoremap <leader>wC0 :10close<cr>| " Close window 10 without focusing it
 
-" leader-end }}}
-
 " Functions {{{
 
 " Airline statusbar config
@@ -356,34 +311,6 @@ function! WindowNumber(...)
   let context = a:2
   call builder.add_section('airline_b', ' %{tabpagewinnr(tabpagenr())} ')
   return 0
-endfunction
-
-function! RangedCommand(start, end, command)
-  silent! execute a:start . "," . a:end . a:command
-endfunction
-
-function! SortVundlePlugins()
-  let l:save_view = winsaveview()
-  norm gg
-  " the 2's are assuming there is a blank line after and begore #begin and #end
-  let start_pos = search("vundle\#begin") + 2
-  let end_pos = search("vundle\#end") - 2
-  " sort in range, case insensitive
-  call RangedCommand(start_pos, end_pos, "sort i")
-  " restore cursor position
-  call winrestview(l:save_view)
-endfunction
-
-function! VundleAppendPlugin()
-  normal mM
-  edit! ~/.vimrc
-  set nofoldenable
-  execute "normal! gg/^call vundle#end()\<cr>?^Plugin\<cr>yypci'\<C-R>+\<esc>"
-  set foldenable
-  VundleInstall
-  close
-  write
-  normal! `M
 endfunction
 
 function! RipgrepFzf(query, fullscreen)
