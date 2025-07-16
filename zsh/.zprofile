@@ -21,8 +21,6 @@ if [ "$(uname)" = "Linux" ]; then
 fi
 export BAT_THEME="Solarized (light)"
 
-export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket
-
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
   # include .bashrc if it exists
