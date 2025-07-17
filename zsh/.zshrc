@@ -1,9 +1,9 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="agnoster"
 HYPHEN_INSENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 ENABLE_CORRECTION="true"
+DISABLE_AUTO_UPDATE="true"
 
 plugins=(
   git
@@ -15,9 +15,6 @@ source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-NEWLINE=$'\n'
-PROMPT="$PROMPT${NEWLINE}> "
 
 CORRECT_IGNORE="*./..."
 
