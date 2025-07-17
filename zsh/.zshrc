@@ -180,3 +180,68 @@ eval "$(starship init zsh)"
 if [ -z "$TMUX" ] && [ $TERM_PROGRAM != "vscode" ]; then
     tmux attach -t $(tmux list-sessions -F "#S #{session_attached}" | grep -E "(\d+) 0" | cut -d ' ' -f 1) || exec tmux new-session && exit;
 fi
+
+declare -A z_auto_fzf=(
+    [buffer]="z"
+    [opts_cmd]="z 2>/dev/null | sort -rn | choose -1 | choose -f / -1"
+    [fzf_cmd]="fzf --height=40% --no-sort"
+)
+declare -A gco_auto_fzf=(
+    [buffer]="gco"
+    [opts_cmd]="git branch"
+    [fzf_cmd]="fzf --height=40%"
+)
+
+declare -a auto_fzf=(
+    z_auto_fzf
+    gco_auto_fzf
+)
+
+z-fzf-enhanced-widget() {
+    local current_buffer="$BUFFER"
+    local cursor_pos="$CURSOR"
+
+    for af in $auto_fzf; do
+        local -A entry=("${(Pkv@)af}")
+        if [[ "$current_buffer" == "${entry[buffer]}" && "$cursor_pos" -eq ${#entry[buffer]} ]]; then
+            # Get directories, handling different possible z outputs
+            local opts
+            # N.B. this assumes the prefix is a valid command in its own right
+            if command -v ${entry[buffer]} >/dev/null 2>&1; then
+                opts=$(eval "${entry[opts_cmd]}")
+            else
+                echo "opt command not found"
+                break
+            fi
+
+            # Check if we got any directories
+            if [[ -z "$opts" ]]; then
+                echo "No inputs found"
+                BUFFER=""
+                CURSOR=0
+                zle reset-prompt
+                return
+            fi
+
+            # Use fzf with better options
+            local fzf_selection=$(echo "$opts" | eval "${entry[fzf_cmd]}")
+
+            if [[ -n "$fzf_selection" ]]; then
+                BUFFER="${BUFFER} $fzf_selection"
+                CURSOR=${#BUFFER}
+                zle accept-line
+            fi
+
+            zle reset-prompt
+        fi
+    done
+
+    # failure case - treat space as normal input. this means our success case MUST return early
+    # Insert regular space
+    BUFFER="${BUFFER} "
+    CURSOR=$((CURSOR + 1))
+}
+
+# Uncomment the following lines to use the enhanced version instead:
+zle -N z-fzf-enhanced-widget
+bindkey ' ' z-fzf-enhanced-widget
