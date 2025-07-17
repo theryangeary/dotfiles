@@ -98,7 +98,7 @@ augroup END
 
 augroup filetypecmds
   autocmd!
-  "autocmd FileType markdown :nnoremap <cr> :execute "!pandoc -F pandoc-crossref % -o /tmp/out.pdf && open /tmp/out.pdf"<cr>
+  autocmd FileType markdown :nnoremap <cr> :execute "!pandoc -F pandoc-crossref % -o /tmp/out.pdf && open /tmp/out.pdf"<cr>
   "autocmd FileType rust :nnoremap <cr> :!RUST_BACKTRACE=1 cargo run<cr>
   "autocmd FileType rust setlocal makeprg=cargo
   "autocmd FileType rust :nnoremap <cr> :!cargo test<cr>

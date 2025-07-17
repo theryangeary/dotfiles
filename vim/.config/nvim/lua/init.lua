@@ -6,8 +6,6 @@ vim.g.loaded_netrw= 1
 vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
 
 -- Scrolling and UI settings
-vim.opt.cursorline = true
-vim.opt.cursorcolumn = true
 vim.opt.signcolumn = 'yes'
 vim.opt.wrap = false
 vim.opt.sidescrolloff = 8
