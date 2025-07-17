@@ -196,14 +196,20 @@ declare -A gd_auto_fzf=(
     [opts_cmd]="git status --short"
     [fzf_cmd]="fzf --height=40% | choose -1"
 )
+declare -A ga_auto_fzf=(
+    [buffer]="ga"
+    [opts_cmd]="git status --short"
+    [fzf_cmd]="fzf --height=40% | choose -1"
+)
 
 declare -a auto_fzf=(
     z_auto_fzf
     gco_auto_fzf
     gd_auto_fzf
+    ga_auto_fzf
 )
 
-z-fzf-enhanced-widget() {
+auto-fzf-enhanced-widget() {
     local current_buffer="$BUFFER"
     local cursor_pos="$CURSOR"
 
@@ -250,5 +256,5 @@ z-fzf-enhanced-widget() {
 }
 
 # Uncomment the following lines to use the enhanced version instead:
-zle -N z-fzf-enhanced-widget
-bindkey ' ' z-fzf-enhanced-widget
+zle -N auto-fzf-enhanced-widget
+bindkey ' ' auto-fzf-enhanced-widget
