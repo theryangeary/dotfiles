@@ -188,13 +188,19 @@ declare -A z_auto_fzf=(
 )
 declare -A gco_auto_fzf=(
     [buffer]="gco"
-    [opts_cmd]="git branch"
+    [opts_cmd]="git branch | grep -vE \"^\\*\" | choose -1"
     [fzf_cmd]="fzf --height=40%"
+)
+declare -A gd_auto_fzf=(
+    [buffer]="gd"
+    [opts_cmd]="git status --short"
+    [fzf_cmd]="fzf --height=40% | choose -1"
 )
 
 declare -a auto_fzf=(
     z_auto_fzf
     gco_auto_fzf
+    gd_auto_fzf
 )
 
 z-fzf-enhanced-widget() {
@@ -211,16 +217,17 @@ z-fzf-enhanced-widget() {
                 opts=$(eval "${entry[opts_cmd]}")
             else
                 echo "opt command not found"
+                zle beep
+                zle reset-prompt
                 break
             fi
 
-            # Check if we got any directories
+            # Check if we got any inputs
             if [[ -z "$opts" ]]; then
-                echo "No inputs found"
-                BUFFER=""
-                CURSOR=0
+                echo "no inputs found"
+                zle beep
                 zle reset-prompt
-                return
+                break
             fi
 
             # Use fzf with better options
@@ -238,7 +245,7 @@ z-fzf-enhanced-widget() {
 
     # failure case - treat space as normal input. this means our success case MUST return early
     # Insert regular space
-    BUFFER="${BUFFER} "
+    BUFFER="${BUFFER:0:$CURSOR} ${BUFFER:$CURSOR}"
     CURSOR=$((CURSOR + 1))
 }
 
