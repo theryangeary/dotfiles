@@ -44,7 +44,7 @@ set showbreak=↪
 set splitbelow
 set splitright
 
-set background=dark
+set background=light
 set mouse=a
 set noshowmode
 set spelllang = "en_us"
@@ -81,7 +81,7 @@ augroup vimrc
 
   autocmd VimEnter * :call airline#add_statusline_func('WindowNumber')
   autocmd VimEnter * :call airline#add_inactive_statusline_func('WindowNumber')
-  autocmd VimEnter * set background=dark | colorscheme solarized | set termguicolors
+  autocmd VimEnter * colorscheme solarized | set termguicolors | set background=light
   autocmd VimEnter * AirlineTheme solarized
 augroup END
 
@@ -171,7 +171,7 @@ set rtp+=~/.fzf
 
 " Post-Vundle stuff {{{
 " Config that has to come after Vundle
-set termguicolors
+"set termguicolors
 
 " unicode symbols
 if !exists('g:airline_symbols')

@@ -36,7 +36,7 @@ local plugins = {
     { 'vim-airline/vim-airline-themes' },
     { 'wellle/targets.vim' },
     { 'morhetz/gruvbox' },
-    { 'lifepillar/vim-solarized8' },
+    { 'shaunsingh/solarized.nvim' },
 
     {  "nvim-lua/plenary.nvim"  },       -- used by other plugins
     {  "nvim-tree/nvim-web-devicons"  }, -- used by other plugins
@@ -63,8 +63,8 @@ local plugins = {
         'saghen/blink.cmp',
         version = '1.*',
         opts_extend = { "sources.default" }
-    },   }
-
+    },
+}
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
