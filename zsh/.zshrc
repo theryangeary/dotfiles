@@ -18,6 +18,7 @@ source $HOME/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/oh-my-zsh.sh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#757575'
 
 CORRECT_IGNORE="*./..."
 
@@ -261,13 +262,21 @@ auto-fzf-enhanced-widget() {
 
 zle -N auto-fzf-enhanced-widget
 bindkey ' ' auto-fzf-enhanced-widget
-eval "$(mise activate zsh)"
 
 function dark() {
     ln -fs ~/.config/alacritty/themes/themes/solarized_dark.toml ~/.config/alacritty/themes/_active.toml
     touch ~/.config/alacritty/alacritty.toml
+    sed -i.bak 's/background=light/background=dark/'  ~/.dotfiles/vim/.vimrc
+    osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true'
+    tmux list-panes -a -F '#{pane_id} #{pane_current_command}' | grep vim | cut -d ' ' -f 1 | xargs -I PANE tmux send-keys -t PANE ESCAPE ":set background=dark" ENTER
 }
 function light() {
     ln -fs ~/.config/alacritty/themes/themes/solarized_light.toml ~/.config/alacritty/themes/_active.toml
     touch ~/.config/alacritty/alacritty.toml
+    sed -i.bak 's/background=dark/background=light/' ~/.dotfiles/vim/.vimrc
+    osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to false'
+    tmux list-panes -a -F '#{pane_id} #{pane_current_command}' | grep vim | cut -d ' ' -f 1 | xargs -I PANE tmux send-keys -t PANE ESCAPE ":set background=light" ENTER
 }
+
+eval "$(mise activate zsh)"
+
