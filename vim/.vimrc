@@ -81,7 +81,7 @@ augroup vimrc
 
   autocmd VimEnter * :call airline#add_statusline_func('WindowNumber')
   autocmd VimEnter * :call airline#add_inactive_statusline_func('WindowNumber')
-  autocmd VimEnter * colorscheme solarized8 | set termguicolors | set bg=light
+  autocmd VimEnter * colorscheme solarized8 | set termguicolors | set bg=dark
   autocmd VimEnter * AirlineTheme solarized
 augroup END
 

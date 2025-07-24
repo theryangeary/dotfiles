@@ -195,12 +195,12 @@ declare -A gco_auto_fzf=(
 )
 declare -A gd_auto_fzf=(
     [buffer]="gd"
-    [opts_cmd]="git status --short"
+    [opts_cmd]="git status --short | choose -1 | awk -F'/' '{s=\"\"; for(i=1;i<=NF;i++) {s=s \$i; print s; if(i<NF) s=s \"/\"}}' | sed '1s/^/.\'$'\n/'"
     [fzf_cmd]="fzf --height=40% | choose -1"
 )
 declare -A ga_auto_fzf=(
     [buffer]="ga"
-    [opts_cmd]="git status --short"
+    [opts_cmd]="git status --short | choose -1 | awk -F'/' '{s=\"\"; for(i=1;i<=NF;i++) {s=s \$i; print s; if(i<NF) s=s \"/\"}}' | sed '1s/^/.\'$'\n/'"
     [fzf_cmd]="fzf --height=40% | choose -1"
 )
 
