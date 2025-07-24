@@ -8,6 +8,7 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(
   git
   docker
+  mise
 )
 
 [[ -r "$HOME/.zsh/z.sh" ]] && source $HOME/.zsh/z.sh
@@ -44,10 +45,11 @@ alias bc="bc -lq"
 alias cat=bat
 alias claude="/Users/ryan/.claude/local/claude"
 alias d="docker"
-alias dc="docker-compose"
+alias dc="docker compose"
 alias e="search"
 alias edit="$EDITOR"
 alias go="nocorrect go"
+alias ga.="ga ."
 alias k="killall"
 alias psag="ps aux | grep"
 alias reset_audio="systemctl status | grep \"/usr/bin/pulseaudio\" | grep -o \"[[:digit:]]\\+\" | head -1 | xargs kill -9"
@@ -177,7 +179,7 @@ fi
 
 eval "$(starship init zsh)"
 
-if [ -z "$TMUX" ] && [ $TERM_PROGRAM != "vscode" ]; then
+if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
     tmux attach -t $(tmux list-sessions -F "#S #{session_attached}" | grep -E "(\d+) 0" | cut -d ' ' -f 1) || exec tmux new-session && exit;
 fi
 
@@ -258,3 +260,4 @@ auto-fzf-enhanced-widget() {
 # Uncomment the following lines to use the enhanced version instead:
 zle -N auto-fzf-enhanced-widget
 bindkey ' ' auto-fzf-enhanced-widget
+eval "$(mise activate zsh)"
