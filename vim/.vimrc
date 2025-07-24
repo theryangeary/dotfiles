@@ -44,7 +44,7 @@ set showbreak=↪
 set splitbelow
 set splitright
 
-set background=dark
+set background=light
 set mouse=a
 set noshowmode
 set spelllang = "en_us"
@@ -81,7 +81,7 @@ augroup vimrc
 
   autocmd VimEnter * :call airline#add_statusline_func('WindowNumber')
   autocmd VimEnter * :call airline#add_inactive_statusline_func('WindowNumber')
-  autocmd VimEnter * set background=dark | colorscheme solarized | set termguicolors
+  autocmd VimEnter * set background=light | colorscheme solarized | set termguicolors
   autocmd VimEnter * AirlineTheme solarized
 augroup END
 
