@@ -8,6 +8,8 @@ DISABLE_AUTO_UPDATE="true"
 plugins=(
   git
   docker
+  fancy-ctrl-z
+  jj
   mise
 )
 
@@ -261,3 +263,13 @@ auto-fzf-enhanced-widget() {
 zle -N auto-fzf-enhanced-widget
 bindkey ' ' auto-fzf-enhanced-widget
 eval "$(mise activate zsh)"
+
+### lyft_localdevtools_shell_rc start
+### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
+    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
+fi
+### lyft_localdevtools_shell_rc end
+
+### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
