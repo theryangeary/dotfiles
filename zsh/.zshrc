@@ -53,6 +53,9 @@ alias e="search"
 alias edit="$EDITOR"
 alias go="nocorrect go"
 alias ga.="ga ."
+alias gdc="git commit --date \"$(date -u -v0H -v0M -v0S +"%Y-%m-%d %H:%M:%S UTC")\" --message "
+alias gdc!="git commit --date \"$(date -u -v0H -v0M -v0S +"%Y-%m-%d %H:%M:%S UTC")\" --amend"
+unalias gcmsg
 alias k="killall"
 alias psag="ps aux | grep"
 alias reset_audio="systemctl status | grep \"/usr/bin/pulseaudio\" | grep -o \"[[:digit:]]\\+\" | head -1 | xargs kill -9"
@@ -199,12 +202,12 @@ declare -A gco_auto_fzf=(
 declare -A gd_auto_fzf=(
     [buffer]="gd"
     [opts_cmd]="git status --short | choose -1 | awk -F'/' '{s=\"\"; for(i=1;i<=NF;i++) {s=s \$i; print s; if(i<NF) s=s \"/\"}}' | sed '1s/^/.\'$'\n/'"
-    [fzf_cmd]="fzf --height=40% | choose -1"
+    [fzf_cmd]="fzf --height=40%"
 )
 declare -A ga_auto_fzf=(
     [buffer]="ga"
     [opts_cmd]="git status --short | choose -1 | awk -F'/' '{s=\"\"; for(i=1;i<=NF;i++) {s=s \$i; print s; if(i<NF) s=s \"/\"}}' | sed '1s/^/.\'$'\n/'"
-    [fzf_cmd]="fzf --height=40% | choose -1"
+    [fzf_cmd]="fzf --height=40%"
 )
 
 declare -a auto_fzf=(
