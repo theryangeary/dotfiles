@@ -268,6 +268,7 @@ bindkey ' ' auto-fzf-enhanced-widget
 
 function dark() {
     ln -fs ~/.config/alacritty/themes/themes/solarized_dark.toml ~/.config/alacritty/themes/_active.toml
+    ln -fs ~/.config/kitty/themes/solarized_dark.conf ~/.config/kitty/theme.conf
     touch ~/.config/alacritty/alacritty.toml
     sed -i.bak 's/background=light/background=dark/'  ~/.dotfiles/vim/.vimrc
     osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true'
@@ -275,6 +276,7 @@ function dark() {
 }
 function light() {
     ln -fs ~/.config/alacritty/themes/themes/solarized_light.toml ~/.config/alacritty/themes/_active.toml
+    ln -fs ~/.config/kitty/themes/solarized_light.conf ~/.config/kitty/theme.conf
     touch ~/.config/alacritty/alacritty.toml
     sed -i.bak 's/background=dark/background=light/' ~/.dotfiles/vim/.vimrc
     osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to false'
