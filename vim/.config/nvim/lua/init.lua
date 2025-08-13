@@ -61,7 +61,12 @@ local plugins = {
     -- https://cmp.saghen.dev/configuration/keymap.html#default
     {
         'saghen/blink.cmp',
-        version = '1.*',
+        opts = {
+            keymap = { preset = 'super-tab' },
+            sources = {
+                default = { 'lsp', 'path', 'snippets', 'buffer' },
+            },
+        },
         opts_extend = { "sources.default" }
     },
 }
