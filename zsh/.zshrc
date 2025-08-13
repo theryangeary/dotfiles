@@ -182,7 +182,7 @@ fi
 
 eval "$(starship init zsh)"
 
-if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ]; then
+if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ] && [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ]; then
     tmux attach -t $(tmux list-sessions -F "#S #{session_attached}" | grep -E "(\d+) 0" | cut -d ' ' -f 1) || exec tmux new-session && exit;
 fi
 
