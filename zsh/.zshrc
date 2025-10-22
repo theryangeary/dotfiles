@@ -4,6 +4,8 @@ HYPHEN_INSENSITIVE="true"
 DISABLE_UPDATE_PROMPT="true"
 ENABLE_CORRECTION="true"
 DISABLE_AUTO_UPDATE="true"
+KITTY_SHELL_INTEGRATION="enabled"
+autoload -Uz -- /Applications/kitty.app/Contents/Resources/kitty/shell-integration/zsh/kitty-integration; kitty-integration; unfunction kitty-integration
 
 plugins=(
   git
