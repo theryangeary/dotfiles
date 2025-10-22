@@ -185,9 +185,9 @@ fi
 
 eval "$(starship init zsh)"
 
-if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ] && [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ]; then
-    tmux attach -t $(tmux list-sessions -F "#S #{session_attached}" | grep -E "(\d+) 0" | cut -d ' ' -f 1) || exec tmux new-session && exit;
-fi
+#if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" != "vscode" ] && [ "$VSCODE_RESOLVING_ENVIRONMENT" != 1 ]; then
+    ##tmux attach -t $(tmux list-sessions -F "#S #{session_attached}" | grep -E "(\d+) 0" | cut -d ' ' -f 1) || exec tmux new-session && exit;
+#fi
 
 declare -A z_auto_fzf=(
     [buffer]="z"
@@ -272,7 +272,7 @@ function dark() {
     touch ~/.config/alacritty/alacritty.toml
     sed -i.bak 's/background=light/background=dark/'  ~/.dotfiles/vim/.vimrc
     osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to true'
-    tmux list-panes -a -F '#{pane_id} #{pane_current_command}' | grep vim | cut -d ' ' -f 1 | xargs -I PANE tmux send-keys -t PANE ESCAPE ":set background=dark" ENTER
+    #tmux list-panes -a -F '#{pane_id} #{pane_current_command}' | grep vim | cut -d ' ' -f 1 | xargs -I PANE tmux send-keys -t PANE ESCAPE ":set background=dark" ENTER
 }
 function light() {
     ln -fs ~/.config/alacritty/themes/themes/solarized_light.toml ~/.config/alacritty/themes/_active.toml
@@ -280,7 +280,7 @@ function light() {
     touch ~/.config/alacritty/alacritty.toml
     sed -i.bak 's/background=dark/background=light/' ~/.dotfiles/vim/.vimrc
     osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to false'
-    tmux list-panes -a -F '#{pane_id} #{pane_current_command}' | grep vim | cut -d ' ' -f 1 | xargs -I PANE tmux send-keys -t PANE ESCAPE ":set background=light" ENTER
+    #tmux list-panes -a -F '#{pane_id} #{pane_current_command}' | grep vim | cut -d ' ' -f 1 | xargs -I PANE tmux send-keys -t PANE ESCAPE ":set background=light" ENTER
 }
 
 eval "$(mise activate zsh)"
