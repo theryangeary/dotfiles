@@ -115,14 +115,14 @@ function mkcdir() {
   cd $1
 }
 
-unalias gco
-function gco() {
-  if [ $# -ne 0 ]; then
-    git checkout $@
-  else
-    git branch | fzf | xargs git checkout
-  fi
-}
+#unalias gco
+#function gco() {
+  #if [ $# -ne 0 ]; then
+    #git checkout $@
+  #else
+    #git branch | fzf | xargs git checkout
+  #fi
+#}
 
 function gcll() {
   builtin pushd ~/src && git clone git@github.com:lyft/$1 && builtin popd
