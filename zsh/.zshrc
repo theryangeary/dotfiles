@@ -54,7 +54,6 @@ alias dc="docker compose"
 alias e="search"
 alias edit="$EDITOR"
 alias ga.="ga ."
-alias gcmsg="git commit --date \"$(date -u -v0H -v0M -v0S +"%Y-%m-%d %H:%M:%S UTC")\" --message "
 alias go="nocorrect go"
 alias k="killall"
 alias psag="ps aux | grep"
@@ -113,6 +112,11 @@ function popd() {
 function mkcdir() {
   mkdir -p $1
   cd $1
+}
+unalias gcmsg
+function gcmsg() {
+    export GIT_COMMITTER_DATE=$(date -u -v0H -v0M -v0S +"%Y-%m-%d %H:%M:%S UTC")
+    git commit --date "$(date -u -v0H -v0M -v0S +"%Y-%m-%d %H:%M:%S UTC")" --message "$@"
 }
 
 #unalias gco
