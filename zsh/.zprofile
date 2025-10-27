@@ -81,6 +81,10 @@ if [ -f "/opt/homebrew/bin/brew" ] ; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+if [ -d "/Applications/kitty.app/Contents/MacOS" ] ; then
+  export PATH=$PATH:/Applications/kitty.app/Contents/MacOS
+fi
+
 # for MacPorts
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export MANPATH="/opt/local/share/man:$MANPATH"
