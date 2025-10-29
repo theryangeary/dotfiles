@@ -183,6 +183,16 @@ function search() {
   vim +$(rg --line-number '.' | sed -e 's/:/ /; s/:/ /' | awk '{if ($2>20) { $2 = $2 " " $2-20} else { $2 = $2 " " 0}; print $0}' | fzf --height=100% --preview "bat -r {3}: --highlight-line {2} --style=numbers,changes --color always {1}" | awk '{print $2 " " $1}')
 }
 
+function setbuild() {
+  export BUILDCMD="$@"
+}
+function build() {
+    BUFFER=$BUILDCMD
+    zle accept-line
+}
+zle -N build
+bindkey '^[^M' build
+
 if [ -f ~/.zshrc_lyft ]; then
     source ~/.zshrc_lyft
 fi
