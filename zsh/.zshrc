@@ -75,6 +75,14 @@ alias swayrc="$EDITOR ~/.config/sway/config"
 alias i3statusrc="$EDITOR ~/.config/i3status/config"
 alias alacrittyrc="$EDITOR ~/.dotfiles/alacritty/.config/alacritty/alacritty.toml"
 
+function copy() {
+  pbcopy $@
+}
+
+function pasta() {
+  pbpaste $@
+}
+
 function after() {
     (sleep $1 && $@[2,-1])&
 }
