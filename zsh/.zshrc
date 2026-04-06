@@ -48,14 +48,15 @@ fi
 
 alias bc="bc -lq"
 alias cat=bat
-alias claude="/Users/ryan/.claude/local/claude"
 alias d="docker"
 alias dc="docker compose"
 alias e="search"
 alias edit="$EDITOR"
+alias glint="ga . && gcmsg \"fix lint\" && gp"
 alias ga.="ga ."
 alias go="nocorrect go"
 alias k="killall"
+alias prs="gh search prs --author @me --owner lyft --state open"
 alias psag="ps aux | grep"
 alias reset_audio="systemctl status | grep \"/usr/bin/pulseaudio\" | grep -o \"[[:digit:]]\\+\" | head -1 | xargs kill -9"
 alias sshap="ssh -p 58354 ryan@antoninus-pius.duckdns.org"
@@ -89,7 +90,8 @@ function after() {
 alias a="after"
 
 function pomodoro() {
-    after 25m say -a 73 -v Bubbles e e, e e
+    TIME=${1:-25}
+    after ${TIME}m say -a 73 -v Bubbles e e, e e, e e
 }
 alias pom="pomodoro"
 
