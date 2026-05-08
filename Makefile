@@ -2,6 +2,9 @@ targets := $(shell find . -mindepth 1 -maxdepth 1 -type d | choose -f / 1 | grep
 
 default: $(targets)
 
+list:
+	echo $(targets)
+
 $(targets):
 	stow $@
 
