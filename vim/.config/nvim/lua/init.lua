@@ -6,7 +6,7 @@
 --vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
 
 -- Scrolling and UI settings
-vim.opt.signcolumn = 'yes'
+--vim.opt.signcolumn = 'yes'
 vim.opt.wrap = false
 vim.opt.sidescrolloff = 8
 vim.opt.scrolloff = 8

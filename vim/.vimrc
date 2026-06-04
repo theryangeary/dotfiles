@@ -52,6 +52,10 @@ set spelllang = "en_us"
 set completeopt=menu,menuone,noselect
 set shortmess+=c
 
+set signcolumn=yes
+set sidescrolloff=8
+set scrolloff=8
+
 if executable("rg")
   set grepprg=rg\ --vimgrep\ --smart-case\ --hidden
   set grepformat=%f:%l:%c:%m
