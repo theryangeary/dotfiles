@@ -310,3 +310,9 @@ function light() {
 
 eval "$(mise activate zsh)"
 
+
+# googletools postinstall: GWS CLI PATH (~/.gws)
+# gws and gws_binary live under ~/.gws/; PATH must include that directory so shells can run them by name.
+if [[ ":${PATH}:" != *":${HOME}/.gws:"* ]]; then
+  export PATH="${HOME}/.gws:${PATH}"
+fi
