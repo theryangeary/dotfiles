@@ -1,9 +1,9 @@
 -- use nvim-tree instead
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrw= 1
+--vim.g.loaded_netrw = 1
+--vim.g.loaded_netrw= 1
 
 -- Use system clipboard
-vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
+--vim.opt.clipboard:append({ "unnamed", "unnamedplus" })
 
 -- Scrolling and UI settings
 vim.opt.signcolumn = 'yes'
@@ -17,15 +17,15 @@ vim.opt.undofile = true
 vim.lsp.inlay_hint.enable(true)
 
 local plugins = {
-    { 'fatih/vim-go' },
-    { 'psf/black' },
-    { 'folke/lsp-colors.nvim' },
+    --{ 'fatih/vim-go' },
+    --{ 'psf/black' },
+    --{ 'folke/lsp-colors.nvim' },
     { 'bronson/vim-trailing-whitespace' },
     { 'junegunn/fzf' },
     { 'junegunn/fzf.vim' },
     { 'rust-lang/rust.vim' },
     { 'scrooloose/nerdcommenter' },
-    { 'scrooloose/nerdtree' },
+    --{ 'scrooloose/nerdtree' },
     { 'sickill/vim-pasta' },
     { 'tpope/vim-abolish' },
     { 'tpope/vim-fugitive' },
@@ -37,6 +37,7 @@ local plugins = {
     { 'wellle/targets.vim' },
     { 'morhetz/gruvbox' },
     { 'shaunsingh/solarized.nvim' },
+    { 'vimwiki/vimwiki' },
 
     {  "nvim-lua/plenary.nvim"  },       -- used by other plugins
     {  "nvim-tree/nvim-web-devicons"  }, -- used by other plugins
@@ -127,10 +128,11 @@ require("conform").setup({
   },
 })
 
-local tele_builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", tele_builtin.git_files, {})
-vim.keymap.set("n", "<leader>fa", tele_builtin.find_files, {})
-vim.keymap.set("n", "<leader>fr", tele_builtin.live_grep, {})
-vim.keymap.set("n", "<leader>bl", tele_builtin.buffers, {})
-vim.keymap.set("n", "<leader>fh", tele_builtin.help_tags, {})
+-- local tele_builtin = require("telescope.builtin")
+-- vim.keymap.set("n", "<leader>ff", tele_builtin.git_files, {})
+-- vim.keymap.set("n", "<leader>fa", tele_builtin.find_files, {})
+-- vim.keymap.set("n", "<leader>fr", tele_builtin.live_grep, {})
+-- vim.keymap.set("n", "<leader>bl", tele_builtin.buffers, {})
+-- vim.keymap.set("n", "<leader>fh", tele_builtin.help_tags, {})
+
 

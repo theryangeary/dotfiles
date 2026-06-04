@@ -18,8 +18,8 @@ set ruler " show cursor coordinates in bottom bar
 set laststatus=2 " Always show statusline
 
 " Scream if lines are too long
-highlight ColorColumn ctermbg=magenta guibg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
+" highlight ColorColumn ctermbg=magenta guibg=magenta
+" call matchadd('ColorColumn', '\%81v', 100)
 
 set wildmenu " autocomplete by tabbing
 set wildignore+=.git
@@ -32,10 +32,10 @@ set incsearch
 set hlsearch
 
 set expandtab
-set smarttab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
+set smarttab
 
 set list
 set listchars=tab:\ \ ,extends:❯,precedes:❮
@@ -66,60 +66,60 @@ set title
 
 "execute "autocmd InsertLeave" g:leader_location ":SortLeaderCommands"
 
-augroup vimrc
-  autocmd!
-  autocmd InsertLeave * :FixWhitespace " Always strip trailing whitespace
-
-  "autocmd BufWritePre *.py execute ':Isort'
-  "autocmd BufWritePre *.py execute ':Black'
-  autocmd BufWritePre *.go execute ':GoFmt'
-
-  autocmd FocusLost * :wa
-  autocmd WinLeave * :wa
-
-  autocmd VimResized * exe "normal! \<c-w>="
-
-  autocmd VimEnter * :call airline#add_statusline_func('WindowNumber')
-  autocmd VimEnter * :call airline#add_inactive_statusline_func('WindowNumber')
-  autocmd VimEnter * set background=light | colorscheme solarized | set termguicolors
-  autocmd VimEnter * AirlineTheme solarized
-augroup END
-
-augroup cursorlinectl
-  autocmd!
-  autocmd WinEnter * :set cursorline
-  autocmd WinLeave * :set nocursorline
-augroup END
-
-augroup ctagsautogenerate
-  autocmd!
-  autocmd BufWrite *.c,*.cpp,*.h,*.hpp :silent! if getcwd() == $HOME | !ctags -R . | endif
-augroup END
-
-augroup filetypecmds
-  autocmd!
-  autocmd FileType markdown :nnoremap <cr> :execute "!pandoc -F pandoc-crossref % -o /tmp/out.pdf && open /tmp/out.pdf"<cr>
-  "autocmd FileType rust :nnoremap <cr> :!RUST_BACKTRACE=1 cargo run<cr>
-  "autocmd FileType rust setlocal makeprg=cargo
-  "autocmd FileType rust :nnoremap <cr> :!cargo test<cr>
-  "autocmd FileType rust :nnoremap <F2> :!cargo run<cr>
-  "autocmd FileType rust :nnoremap <F3> :!RUST_BACKTRACE=1 cargo run<cr>
-  "autocmd FileType rust :nnoremap <F4> :!RUST_BACKTRACE=full cargo run<cr>
-  "autocmd FileType tex :nnoremap <cr> :execute "!pdflatex % && mupdf" expand('%:t:r') . ".pdf"<cr>
-  "autocmd FileType vim :nnoremap <cr> :source %<cr>
-  "autocmd FileType python :nnoremap <cr> :!python3 %<cr>
-  autocmd FileType json syntax match Comment +\/\/.\+$+
-  "autocmd FileType c,cpp :nnoremap <cr> :!gcc % && ./a.out |
-  "autocmd FileType hsq :nnoremap <cr> :!hsq %<cr>
-  "autocmd FileType html :nnoremap <cr> :!xdg-open %<cr>
-  "autocmd FileType java :nnoremap <cr> :!./gradlew installDist<cr>
-  "autocmd FileType go :nnoremap <cr> :GoTestFunc<cr>
-augroup END
-
-augroup DragQuickfixWindowDown
-    autocmd!
-    autocmd FileType qf wincmd J
-augroup end
+" augroup vimrc
+"   autocmd!
+"   autocmd InsertLeave * :FixWhitespace " Always strip trailing whitespace
+" 
+"   "autocmd BufWritePre *.py execute ':Isort'
+"   "autocmd BufWritePre *.py execute ':Black'
+"   autocmd BufWritePre *.go execute ':GoFmt'
+" 
+"   autocmd FocusLost * :wa
+"   autocmd WinLeave * :wa
+" 
+"   autocmd VimResized * exe "normal! \<c-w>="
+" 
+"   autocmd VimEnter * :call airline#add_statusline_func('WindowNumber')
+"   autocmd VimEnter * :call airline#add_inactive_statusline_func('WindowNumber')
+"   autocmd VimEnter * set background=dark | colorscheme solarized | set termguicolors
+"   autocmd VimEnter * AirlineTheme solarized
+" augroup END
+" 
+" augroup cursorlinectl
+"   autocmd!
+"   autocmd WinEnter * :set cursorline
+"   autocmd WinLeave * :set nocursorline
+" augroup END
+" 
+" augroup ctagsautogenerate
+"   autocmd!
+"   autocmd BufWrite *.c,*.cpp,*.h,*.hpp :silent! if getcwd() == $HOME | !ctags -R . | endif
+" augroup END
+" 
+" augroup filetypecmds
+"   autocmd!
+"   autocmd FileType markdown :nnoremap <cr> :execute "!pandoc -F pandoc-crossref % -o /tmp/out.pdf && open /tmp/out.pdf"<cr>
+"   "autocmd FileType rust :nnoremap <cr> :!RUST_BACKTRACE=1 cargo run<cr>
+"   "autocmd FileType rust setlocal makeprg=cargo
+"   "autocmd FileType rust :nnoremap <cr> :!cargo test<cr>
+"   "autocmd FileType rust :nnoremap <F2> :!cargo run<cr>
+"   "autocmd FileType rust :nnoremap <F3> :!RUST_BACKTRACE=1 cargo run<cr>
+"   "autocmd FileType rust :nnoremap <F4> :!RUST_BACKTRACE=full cargo run<cr>
+"   "autocmd FileType tex :nnoremap <cr> :execute "!pdflatex % && mupdf" expand('%:t:r') . ".pdf"<cr>
+"   "autocmd FileType vim :nnoremap <cr> :source %<cr>
+"   "autocmd FileType python :nnoremap <cr> :!python3 %<cr>
+"   autocmd FileType json syntax match Comment +\/\/.\+$+
+"   "autocmd FileType c,cpp :nnoremap <cr> :!gcc % && ./a.out |
+"   "autocmd FileType hsq :nnoremap <cr> :!hsq %<cr>
+"   "autocmd FileType html :nnoremap <cr> :!xdg-open %<cr>
+"   "autocmd FileType java :nnoremap <cr> :!./gradlew installDist<cr>
+"   "autocmd FileType go :nnoremap <cr> :GoTestFunc<cr>
+" augroup END
+" 
+" augroup DragQuickfixWindowDown
+"     autocmd!
+"     autocmd FileType qf wincmd J
+" augroup end
 
 " }}}
 
@@ -136,10 +136,9 @@ inoremap kj <Esc>
 " }}}
 
 " Vundle {{{
-set nocompatible
 filetype off
 "set rtp+=~/.vim/bundle/Vundle.vim
-set rtp+=~/.fzf
+" set rtp+=~/.fzf
 "call vundle#begin()
 
 
@@ -183,8 +182,8 @@ syntax enable " enable syntax processing
 "filetype plugin indent on " load filetype-specific indent files
 
 " Nerdtree config
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+" let g:NERDTreeDirArrowExpandable = '▸'
+" let g:NERDTreeDirArrowCollapsible = '▾'
 
 " vim-markdown-preview config
 let vim_markdown_preview_github=1
@@ -193,23 +192,28 @@ let g:sunset_latitude = 40.712776
 let g:sunset_longitude = -74.005974
 let g:sunset_utc_offset = -4
 
-let g:fzf_layout = {'down': '75%'}
+" let g:fzf_layout = {'down': '75%'}
 
-let g:rustfmt_autosave = 1
+" let g:rustfmt_autosave = 1
 
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 let g:completion_matching_smart_case = 1
 
-let g:deoplete#enable_as_startup = 1
+" let g:deoplete#enable_as_startup = 1
 
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_operators = 1
+" let g:go_def_mode='gopls'
+" let g:go_info_mode='gopls'
+" let g:go_highlight_fields = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_function_calls = 1
+" let g:go_highlight_extra_types = 1
+" let g:go_highlight_operators = 1
 
+" requires running `$ gem install --user-install vimwiki_markdown`
+let g:vimwiki_list = [{'path': '~/vimwiki', 
+            \ 'syntax': 'markdown',
+            \ 'ext': '.md',
+            \ 'links_space_char': '_'}]
 " }}}
 
 " leader mappings {{{
@@ -228,9 +232,9 @@ nnoremap <leader>dcl :let @+=@% . ':' . line('.')<cr>|
 
 " Files
 nnoremap <leader>fe :edit |
-nnoremap <leader>ff :FZF<cr>| " Find file
-nnoremap <leader>fr :RG<cr>| " Use rg to find file contents
-nnoremap <leader>fs :update<cr>|
+" nnoremap <leader>ff :FZF<cr>| " Find file
+" nnoremap <leader>fr :RG<cr>| " Use rg to find file contents
+" nnoremap <leader>fs :update<cr>|
 nnoremap <leader><leader> :update<cr>|
 nnoremap <leader>fve :edit ~/.vimrc<cr>|
 nnoremap <leader>fvn :edit ~/.config/nvim/init.vim<cr>|
@@ -263,7 +267,7 @@ nnoremap <leader>mt :make test<cr>| " build and run tests
 nnoremap <leader>sop :source %<cr>| " source current file
 
 " NERDTree
-nnoremap <leader>nt :NERDTreeToggle<cr>| " NERDTreeToggle
+" nnoremap <leader>nt :NERDTreeToggle<cr>| " NERDTreeToggle
 
 " Quickfix
 nnoremap <leader>cn :cnext<cr>
@@ -278,7 +282,7 @@ nnoremap <leader>sp 1z=
 nnoremap <leader>tow :set wrap!<cr>
 
 " Vundle
-nnoremap <leader>vap :call VundleAppendPlugin()<cr>call SortVundlePlugins()<cr>
+" nnoremap <leader>vap :call VundleAppendPlugin()<cr>call SortVundlePlugins()<cr>
 
 " Window
 nnoremap <leader>0 :exe 10 . "wincmd w"<cr>| " Go to window number 10
@@ -291,17 +295,17 @@ nnoremap <leader>6 :exe 6  . "wincmd w"<cr>| " Go to window number 6
 nnoremap <leader>7 :exe 7  . "wincmd w"<cr>| " Go to window number 7
 nnoremap <leader>8 :exe 8  . "wincmd w"<cr>| " Go to window number 8
 nnoremap <leader>9 :exe 9  . "wincmd w"<cr>| " Go to window number 9
-nnoremap <leader>w | " Make all window bindings easily available
-nnoremap <leader>wC1 :1close<cr>| " Close window 1 without focusing it
-nnoremap <leader>wC2 :2close<cr>| " Close window 2 without focusing it
-nnoremap <leader>wC3 :3close<cr>| " Close window 3 without focusing it
-nnoremap <leader>wC4 :4close<cr>| " Close window 4 without focusing it
-nnoremap <leader>wC5 :5close<cr>| " Close window 5 without focusing it
-nnoremap <leader>wC6 :6close<cr>| " Close window 6 without focusing it
-nnoremap <leader>wC7 :7close<cr>| " Close window 7 without focusing it
-nnoremap <leader>wC8 :8close<cr>| " Close window 8 without focusing it
-nnoremap <leader>wC9 :9close<cr>| " Close window 9 without focusing it
-nnoremap <leader>wC0 :10close<cr>| " Close window 10 without focusing it
+" nnoremap <leader>w | " Make all window bindings easily available
+" nnoremap <leader>wC1 :1close<cr>| " Close window 1 without focusing it
+" nnoremap <leader>wC2 :2close<cr>| " Close window 2 without focusing it
+" nnoremap <leader>wC3 :3close<cr>| " Close window 3 without focusing it
+" nnoremap <leader>wC4 :4close<cr>| " Close window 4 without focusing it
+" nnoremap <leader>wC5 :5close<cr>| " Close window 5 without focusing it
+" nnoremap <leader>wC6 :6close<cr>| " Close window 6 without focusing it
+" nnoremap <leader>wC7 :7close<cr>| " Close window 7 without focusing it
+" nnoremap <leader>wC8 :8close<cr>| " Close window 8 without focusing it
+" nnoremap <leader>wC9 :9close<cr>| " Close window 9 without focusing it
+" nnoremap <leader>wC0 :10close<cr>| " Close window 10 without focusing it
 
 " Functions {{{
 
@@ -313,14 +317,14 @@ function! WindowNumber(...)
   return 0
 endfunction
 
-function! RipgrepFzf(query, fullscreen)
-  let cmd_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
-  let initial_cmd = printf(cmd_fmt, shellescape(a:query))
-  let reload_cmd = printf(cmd_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_cmd]}
-  call fzf#vim#grep(initial_cmd, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+" function! RipgrepFzf(query, fullscreen)
+"   let cmd_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+"   let initial_cmd = printf(cmd_fmt, shellescape(a:query))
+"   let reload_cmd = printf(cmd_fmt, '{q}')
+"   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_cmd]}
+"   call fzf#vim#grep(initial_cmd, 1, fzf#vim#with_preview(spec), a:fullscreen)
+" endfunction
+" command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 " }}}
 
