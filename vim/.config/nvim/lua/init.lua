@@ -7,26 +7,25 @@
 
 -- Scrolling and UI settings
 --vim.opt.signcolumn = 'yes'
-vim.opt.wrap = false
-vim.opt.sidescrolloff = 8
-vim.opt.scrolloff = 8
+--vim.opt.wrap = false
+--vim.opt.sidescrolloff = 8
+--vim.opt.scrolloff = 8
 
-vim.opt.undodir = vim.fn.stdpath("cache") .. "/undo"
-vim.opt.undofile = true
+--vim.opt.undodir = vim.fn.stdpath("cache") .. "/undo"
+--vim.opt.undofile = true
 
-vim.lsp.inlay_hint.enable(true)
 
 local plugins = {
     --{ 'fatih/vim-go' },
     --{ 'psf/black' },
     --{ 'folke/lsp-colors.nvim' },
     { 'bronson/vim-trailing-whitespace' },
-    { 'junegunn/fzf' },
-    { 'junegunn/fzf.vim' },
+    -- { 'junegunn/fzf' },
+    -- { 'junegunn/fzf.vim' },
     { 'rust-lang/rust.vim' },
-    { 'scrooloose/nerdcommenter' },
+    -- { 'scrooloose/nerdcommenter' },
     --{ 'scrooloose/nerdtree' },
-    { 'sickill/vim-pasta' },
+    -- { 'sickill/vim-pasta' },
     { 'tpope/vim-abolish' },
     { 'tpope/vim-fugitive' },
     { 'tpope/vim-rhubarb' },
