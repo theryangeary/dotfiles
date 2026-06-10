@@ -1,4 +1,7 @@
 return {
+    "tpope/vim-fugitive",
+    "tpope/vim-surround",
+    "vimwiki/vimwiki",
     "neovim/nvim-lspconfig",
 
     {
