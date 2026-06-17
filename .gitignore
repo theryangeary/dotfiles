@@ -3,3 +3,4 @@ vim/.vim/bundle
 vim/.config/nvim/lazy-lock.json
 *.bak
 .local/bin/dynamex
+rustcast/.config/rustcast/ranking.toml

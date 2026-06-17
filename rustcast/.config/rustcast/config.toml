@@ -1,0 +1,41 @@
+toggle_hotkey = "SUPER+SPACE"
+clipboard_hotkey = "SUPER+SHIFT+V"
+event_duration = 60
+main_page = "frequentlyused"
+start_at_login = true
+placeholder = " "
+search_url = "https://duckduckgo.com/search?q=%s"
+haptic_feedback = false
+cbhist = true
+cbhist_paste_on_select = true
+show_trayicon = true
+shells = []
+search_dirs = ["~"]
+log_path = "/tmp/rustcast.log"
+debounce_delay = 300
+auto_update = false
+check_for_updates = false
+
+[buffer_rules]
+clear_on_hide = true
+clear_on_enter = true
+
+[theme]
+text_color = [
+    0.95,
+    0.95,
+    0.96,
+]
+background_color = [
+    0.0,
+    0.0,
+    0.0,
+]
+blur = false
+show_icons = true
+show_scroll_bar = false
+theme_mode = "dark"
+
+[modes]
+
+[aliases]
