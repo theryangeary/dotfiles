@@ -47,7 +47,7 @@ if [ $(uname) = "Linux" ]; then
 fi
 
 alias bc="bc -lq"
-alias c="claude"
+alias c="claude --model Opus"
 alias cat=bat
 alias d="docker"
 alias dc="docker compose"
