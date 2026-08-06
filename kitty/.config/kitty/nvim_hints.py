@@ -52,6 +52,7 @@ def handle_result(args, data, target_window_id, boss, extra_cli_args, *a):
         nvim_cmd.append(path)
 
         shell_cmd = ' '.join(shlex.quote(a) for a in nvim_cmd)
+        boss.set_clipboard_text(m)
         boss.call_remote_control(None, ('launch', '--type=window', '--cwd=current', '--', '/bin/zsh', '-l', '-c', shell_cmd))
     except Exception:
         _log(traceback.format_exc())
