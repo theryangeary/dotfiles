@@ -7,12 +7,18 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = { "lua_ls", "rust_analyzer", "gopls" },
+            -- gopls installed via brew: mason's build needs go >= 1.26 and
+            -- GOTOOLCHAIN=local blocks the toolchain download.
+            ensure_installed = { "lua_ls", "rust_analyzer" },
         },
         dependencies = {
             { "mason-org/mason.nvim", opts = {} },
             "neovim/nvim-lspconfig",
         },
+        config = function(_, opts)
+            require("mason-lspconfig").setup(opts)
+            vim.lsp.enable("gopls")
+        end,
     },
 
     -- Completion
