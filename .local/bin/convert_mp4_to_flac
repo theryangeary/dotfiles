@@ -1,0 +1,13 @@
+#!/bin/bash
+
+echo "$1"
+#exit 1
+if [ -f "$1" ] && [ ! -f "$1.flac" ]; then
+    ffmpeg -i "$1" "$1.flac"
+fi
+if [ -f "$1" ] && [ -f "$1.flac" ]; then
+    rm "$1"
+fi
+if [ ! -f "$1" ] && [ -f "$1.flac" ]; then
+    mv "$1.flac" "${1%.mp4}.flac"
+fi

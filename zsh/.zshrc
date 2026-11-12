@@ -194,6 +194,30 @@ function search() {
   vim +$(rg --line-number '.' | sed -e 's/:/ /; s/:/ /' | awk '{if ($2>20) { $2 = $2 " " $2-20} else { $2 = $2 " " 0}; print $0}' | fzf --height=100% --preview "bat -r {3}: --highlight-line {2} --style=numbers,changes --color always {1}" | awk '{print $2 " " $1}')
 }
 
+function download_audio() {
+    ARTIST=$1
+    ALBUM=$2
+    URL=$3
+    yt-dlp --format="ba" --extract-audio --continue --no-overwrites --add-metadata  -o "$1/$2/%(track_number,playlist_index)s %(title)s.%(ext)s" $3
+}
+
+function extract_dash_format_zip() {
+    ARTIST=$1
+    ALBUM=$2
+    if [ -d "/Volumes/media/Music/$ARTIST/$ALBUM" ];
+    then
+        "folder already exists; make sure not to overwrite"
+        return
+    fi
+    mkdir -p "/Volumes/media/Music/$ARTIST/$ALBUM"
+    builtin pushd "/Volumes/media/Music/$ARTIST/$ALBUM"
+    unzip "/Volumes/media/MusicSourceFiles/$ALBUM - $ARTIST.zip"
+    mv "/Volumes/media/MusicSourceFiles/$ALBUM - $ARTIST.zip" "/Volumes/media/MusicSourceFiles/imported/"
+    builtin popd
+}
+
+
+
 function setbuild() {
   export BUILDCMD="$@"
 }
