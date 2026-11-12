@@ -7,9 +7,7 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {
-            -- gopls installed via brew: mason's build needs go >= 1.26 and
-            -- GOTOOLCHAIN=local blocks the toolchain download.
-            ensure_installed = { "lua_ls", "rust_analyzer" },
+            ensure_installed = { "lua_ls", "rust_analyzer", "gopls", "ansible-language-server" },
         },
         dependencies = {
             { "mason-org/mason.nvim", opts = {} },
