@@ -130,14 +130,24 @@ function gcmsg() {
     git commit --date "$(date -u -v0H -v0M -v0S +"%Y-%m-%d %H:%M:%S UTC")" --message "$@"
 }
 
-#unalias gco
-#function gco() {
-  #if [ $# -ne 0 ]; then
-    #git checkout $@
-  #else
-    #git branch | fzf | xargs git checkout
-  #fi
-#}
+# gco: behaves exactly like the oh-my-zsh alias (`git checkout "$@"`), except
+# `gco <branch>` cd's into the worktree where <branch> is already checked out.
+unalias gco 2>/dev/null
+function gco() {
+  if [[ $# -eq 1 && $1 != -* ]]; then
+    local wt
+    wt=$(git worktree list --porcelain 2>/dev/null | awk -v ref="branch refs/heads/$1" '
+      /^worktree / { p = substr($0, 10) }
+      $0 == ref    { print p; exit }')
+    if [[ -n $wt && $wt != $(git rev-parse --show-toplevel 2>/dev/null) ]]; then
+      echo "→ $1 is checked out in $wt"
+      cd "$wt"
+      return
+    fi
+  fi
+  git checkout "$@"
+}
+compdef _git gco=git-checkout
 
 function gcll() {
   builtin pushd ~/src && git clone git@github.com:lyft/$1 && builtin popd
